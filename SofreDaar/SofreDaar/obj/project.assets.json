@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\AP\\FinalProject\\SofreDaar\\SofreDaar\\SofreDaar.csproj",
+      "projectUniqueName": "F:\\AP\\AP-Project-402-2\\SofreDaar\\SofreDaar\\SofreDaar.csproj",
       "projectName": "SofreDaar",
-      "projectPath": "F:\\AP\\FinalProject\\SofreDaar\\SofreDaar\\SofreDaar.csproj",
+      "projectPath": "F:\\AP\\AP-Project-402-2\\SofreDaar\\SofreDaar\\SofreDaar.csproj",
       "packagesPath": "C:\\Users\\SeyedAli\\.nuget\\packages\\",
-      "outputPath": "F:\\AP\\FinalProject\\SofreDaar\\SofreDaar\\obj\\",
+      "outputPath": "F:\\AP\\AP-Project-402-2\\SofreDaar\\SofreDaar\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
