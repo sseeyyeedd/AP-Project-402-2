@@ -7,11 +7,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Rectangle Fill="Aqua"></Rectangle>
-        <Rectangle Grid.Row="1" Fill="Red"></Rectangle>
     </Grid>
 </Window>
