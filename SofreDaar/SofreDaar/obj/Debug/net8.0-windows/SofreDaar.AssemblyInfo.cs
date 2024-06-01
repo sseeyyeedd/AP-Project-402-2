@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+648e35991255113160cd1e300502b8d6aacb7f0e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+140afe0e722a21185e867b0c8cba5c90321c213a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

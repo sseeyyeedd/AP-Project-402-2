@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using SofreDaar.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,16 @@ namespace SofreDaar
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainViewModel VM { get; set; }
         public MainWindow()
         {
+            VM = new MainViewModel();
+            DataContext=VM;
+            
             InitializeComponent();
+           
         }
+        
+
     }
 }
