@@ -15,14 +15,14 @@ public class Email
         try
         {
             MailMessage mail = new MailMessage();
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("youremail@gmail.com");
+            SmtpClient smtpClient = new SmtpClient("mail.sseeyyeedd.ir");
+            mail.From = new MailAddress("mail@sseeyyeedd.ir");
             mail.To.Add(recipientEmail);
             mail.Subject = "Email Verification";
             mail.Body = "Your verification code is: " + code;
-            smtpClient.Port = 587;
+            smtpClient.Port = 465;
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential("youremail@gmail.com", "yourpassword");
+            smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
             smtpClient.EnableSsl = true;
             smtpClient.Send(mail);
 
