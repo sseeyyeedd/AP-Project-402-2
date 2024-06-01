@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9a2357aacc58a5d61ce059c0e6f45cafc2678cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2414cb44919af5ecbe8a279cb48630e7408ad9b1")]
 [assembly: System.Reflection.AssemblyProductAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SofreDaar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
