@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+
+using Microsoft.EntityFrameworkCore;
 using SofreDaar.Models;
 
 namespace SofreDaar.Infrastructure
