@@ -11,10 +11,6 @@ namespace SofreDaar.ViewModels
 
     public class MainViewModel : ObservableObject
     {
-        public MainViewModel()
-        {
-            MyProperty="ajsjosjodsd";
-        }
         private ObservableObject _currentViewModel;
         public ObservableObject CurrentViewModel
         {
@@ -25,28 +21,16 @@ namespace SofreDaar.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string _myProperty;
-
-        public string MyProperty
-        {
-            get { return _myProperty; }
-            set
-            {
-                _myProperty = value;
-                OnPropertyChanged();
-            }
-        }
-        //public ICommand HomeCommand { get; set; }
+        
+        public ICommand LoginCommand { get; set; }
         //public ICommand SettingsCommand { get; set; }
 
-        //public MainViewModel()
-        //{
-        //    HomeCommand = new RelayCommand(o => CurrentViewModel = new HomeViewModel());
-        //    SettingsCommand = new RelayCommand(o => CurrentViewModel = new SettingsViewModel());
+        public MainViewModel()
+        {
+            LoginCommand = new RelayCommand(o => CurrentViewModel = new LoginViewModel());
 
-        //    // Set default ViewModel
-        //    CurrentViewModel = new HomeViewModel();
-        //}
+            CurrentViewModel = new LoginViewModel();
+        }
 
     }
 }

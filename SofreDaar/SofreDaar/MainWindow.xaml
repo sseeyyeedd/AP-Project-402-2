@@ -4,10 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SofreDaar"
+        xmlns:vm="clr-namespace:SofreDaar.ViewModels"
+        xmlns:views="clr-namespace:SofreDaar.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+        Title="SofreDaar" MinHeight="450" MinWidth="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+            <views:Login />
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Label Content="{Binding MyProperty}"></Label>
+        <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
     </Grid>
 </Window>
