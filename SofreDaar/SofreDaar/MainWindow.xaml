@@ -6,12 +6,8 @@
         xmlns:local="clr-namespace:SofreDaar"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="9*"/>
-        </Grid.RowDefinitions>
-        <Rectangle Fill="red"></Rectangle>
-        <Rectangle Grid.Row="1" Fill="BurlyWood"></Rectangle>
+        <Label Content="{Binding MyProperty}"></Label>
     </Grid>
 </Window>
