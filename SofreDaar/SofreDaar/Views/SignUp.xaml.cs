@@ -1,5 +1,4 @@
-﻿using SofreDaar.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,28 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using SofreDaar.ViewModels;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for SignUp.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class SignUp : UserControl
     {
-        public Login()
+        public SignUp()
         {
             InitializeComponent();
         }
-        public LoginViewModel VM { get; set; }
-        public Login(LoginViewModel vm):this()
+        public SignUpViewModel VM { get; set; }
+        public SignUp(SignUpViewModel vm):this()
         {
             VM = vm;
             DataContext=VM;
-        }
-
-        private void usernameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            VM.LoginCommand.Execute(sender);
+            
         }
     }
 }

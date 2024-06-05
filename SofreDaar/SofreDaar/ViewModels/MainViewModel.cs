@@ -1,9 +1,4 @@
-﻿using SofreDaar.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SofreDaar.Infrastructure;
 using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
@@ -21,16 +16,19 @@ namespace SofreDaar.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         public ICommand LoginCommand { get; set; }
+        public ICommand SignUpCommand { get; set; }
         //public ICommand SettingsCommand { get; set; }
-
-        public MainViewModel()
+        
+        public MainViewModel(DatabaseContext DbContext)
         {
-            LoginCommand = new RelayCommand(o => CurrentViewModel = new LoginViewModel());
+            {
+                LoginCommand = new RelayCommand(o => CurrentViewModel = new LoginViewModel(DbContext, this));
+                SignUpCommand=new RelayCommand(o => CurrentViewModel=new SignUpViewModel(DbContext, this));
+                CurrentViewModel = new LoginViewModel(DbContext, this);
+            }
 
-            CurrentViewModel = new LoginViewModel();
         }
-
     }
 }

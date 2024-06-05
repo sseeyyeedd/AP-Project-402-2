@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace SofreDaar.Core
+namespace SofreDaar.Infrastructure
 {
     public class RelayCommand : ICommand
     {
@@ -23,6 +23,6 @@ namespace SofreDaar.Core
         public void Execute(object parameter)
         {
             _execute(parameter);
-        }
+        }   
     }
 }

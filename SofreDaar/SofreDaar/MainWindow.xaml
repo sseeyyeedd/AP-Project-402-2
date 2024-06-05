@@ -12,6 +12,9 @@
         <DataTemplate DataType="{x:Type vm:LoginViewModel}">
             <views:Login />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SignUpViewModel}">
+            <views:SignUp />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>

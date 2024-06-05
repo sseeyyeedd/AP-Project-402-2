@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SofreDaar.Core
+namespace SofreDaar.Infrastructure
 {
     public class ObservableObject : INotifyPropertyChanged
     {

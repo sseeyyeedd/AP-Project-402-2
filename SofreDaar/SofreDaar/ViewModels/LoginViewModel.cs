@@ -1,21 +1,28 @@
-﻿using SofreDaar.Core;
+﻿using SofreDaar.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
 {
-    public class LoginViewModel : ObservableObject
+    public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel()
+        
+        public LoginViewModel(DatabaseContext DbContext,MainViewModel main):base(DbContext,main)
         {
-            Username="";
-
+            _username="";
+			_password="";
+			LoginCommand=new RelayCommand(o=>{
+				//Username=DbContext.Foods.First().ToString()??"null";
+            });
+			
         }
-        private string _username;
+		private string _username;
 
 		public string Username
 		{
@@ -29,7 +36,7 @@ namespace SofreDaar.ViewModels
 			get { return _password; }
 			set { _password = value; OnPropertyChanged(); }
 		}
+        public ICommand LoginCommand { get; set; }
 
-
-	}
+    }
 }

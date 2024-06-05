@@ -1,4 +1,5 @@
-﻿using SofreDaar.ViewModels;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using SofreDaar.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SofreDaar.Infrastructure;
 
 namespace SofreDaar
 {
@@ -18,11 +20,10 @@ namespace SofreDaar
     public partial class MainWindow : Window
     {
         public MainViewModel VM { get; set; }
-        public MainWindow()
+        public MainWindow(MainViewModel vm)
         {
-            VM = new MainViewModel();
+            VM = vm;
             DataContext=VM;
-            
             InitializeComponent();
            
         }
