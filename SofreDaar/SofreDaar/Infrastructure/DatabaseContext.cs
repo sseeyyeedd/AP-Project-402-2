@@ -15,6 +15,7 @@ namespace SofreDaar.Infrastructure
         public DbSet<Food> Foods { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Commnet> Commnets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,11 +43,23 @@ namespace SofreDaar.Infrastructure
                 .HasForeignKey(x => x.RestaurantId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
+            modelBuilder.Entity<Commnet>(entity =>
+            {
+                entity
+                    .HasOne(x => x.Food)
+                    .WithMany(x => x.Commnets)
+                    .HasForeignKey(x => x.FoodId);
+                entity
+                    .HasOne(x => x.Client)
+                    .WithMany(x => x.Commnets)
+                    .HasForeignKey(x => x.ClientId);
+            });
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Client>().ToTable("Clients");
             modelBuilder.Entity<Restaurant>().ToTable("Restaurants");
             modelBuilder.Entity<Food>().ToTable("Foods");
             modelBuilder.Entity<Order>().ToTable("Orders");
+            modelBuilder.Entity<Commnet>().ToTable("Comments");
         }
     }
 }
