@@ -16,6 +16,7 @@ namespace SofreDaar.Infrastructure
         public DbSet<Order> Orders { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Commnet> Commnets { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,9 +51,32 @@ namespace SofreDaar.Infrastructure
                     .WithMany(x => x.Commnets)
                     .HasForeignKey(x => x.FoodId);
                 entity
+                .HasOne(x => x.Order)
+                .WithOne(x => x.Commnet)
+                .HasForeignKey<Commnet>(x => x.OrderId)
+                .OnDelete(DeleteBehavior.Restrict);
+                entity
+                .HasOne(x => x.ReplayTo)
+                .WithMany(x => x.Replays)
+                .HasForeignKey(x => x.ReplayToId)
+                .OnDelete(DeleteBehavior.Restrict);
+                entity
                     .HasOne(x => x.Client)
                     .WithMany(x => x.Commnets)
                     .HasForeignKey(x => x.ClientId);
+            });
+            modelBuilder.Entity<Report>(entity =>
+            {
+                entity
+                .HasOne(x => x.Restaurant)
+                .WithMany(x => x.Reports)
+                .HasForeignKey(x => x.RestaurantId)
+                .OnDelete(DeleteBehavior.Restrict);
+                entity
+                .HasOne(x => x.Client)
+                .WithMany(x => x.Reports)
+                .HasForeignKey(x => x.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Client>().ToTable("Clients");
@@ -60,6 +84,7 @@ namespace SofreDaar.Infrastructure
             modelBuilder.Entity<Food>().ToTable("Foods");
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Commnet>().ToTable("Comments");
+            modelBuilder.Entity<Report>().ToTable("Reports");
         }
     }
 }

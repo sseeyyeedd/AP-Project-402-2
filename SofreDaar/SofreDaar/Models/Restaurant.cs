@@ -12,4 +12,5 @@ public class Restaurant:Base.User
     public string Address { get; set; }
     public ICollection<Food> Foods { get; set; }
     public ICollection<Order> Orders { get; set; }
+    public ICollection<Report> Reports { get; set; }
 }
