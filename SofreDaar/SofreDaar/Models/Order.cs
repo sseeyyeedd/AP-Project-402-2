@@ -10,5 +10,10 @@ public class Order:Base.Entity
     public Client Client { get; set; }
     [Required]
     public Guid ClientId { get; set; }
+    public Commnet Commnet { get; set; }
+    public Guid CommentId { get; set; }
     public ICollection<Food> Foods { get; set; }
+    public bool IsReservation { get; set; }
+    public DateTime DateTime { get; set; }
+    public bool IsPaymentInCash { get; set; }
 }
