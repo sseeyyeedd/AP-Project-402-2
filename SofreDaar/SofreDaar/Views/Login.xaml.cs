@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,17 +25,15 @@ namespace SofreDaar.Views
         public Login()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
         public LoginViewModel VM { get; set; }
-        public Login(LoginViewModel vm):this()
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            VM = vm;
-            DataContext=VM;
-        }
-
-        private void usernameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            VM.LoginCommand.Execute(sender);
+            if (DataContext is LoginViewModel viewModel)
+            {
+                VM = viewModel;
+            }
         }
     }
 }

@@ -29,8 +29,7 @@ namespace SofreDaar
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<SignUpViewModel>();
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<Login>();
-            services.AddSingleton<SignUp>();
+            
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

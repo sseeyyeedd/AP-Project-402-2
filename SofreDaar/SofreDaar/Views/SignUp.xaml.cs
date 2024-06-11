@@ -23,7 +23,16 @@ namespace SofreDaar.Views
         public SignUp()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
         }
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is SignUpViewModel viewModel)
+            {
+                VM = viewModel;
+            }
+        }
+
         public SignUpViewModel VM { get; set; }
         public SignUp(SignUpViewModel vm):this()
         {
