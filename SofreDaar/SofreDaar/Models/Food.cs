@@ -13,7 +13,7 @@ public class Food:Base.Entity
     [Required]
     public Guid RestaurantId { get; set; }
     [Required]
-    public FoodType FoodType { get; set; }
+    public string FoodType { get; set; }
     public ICollection<Order> Orders { get; set; }
     public ICollection<Commnet> Commnets { get; set; }
     public int Stock { get; set; }

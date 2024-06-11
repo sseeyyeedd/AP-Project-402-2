@@ -18,7 +18,7 @@ namespace SofreDaar.ViewModels
             _username="";
 			_password="";
 			LoginCommand=new RelayCommand(o=>{
-				//Username=DbContext.Foods.First().ToString()??"null";
+				
             });
 			
         }
