@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:SofreDaar.ViewModels"
         xmlns:views="clr-namespace:SofreDaar.Views"
         mc:Ignorable="d"
-        Title="SofreDaar" MinHeight="450" MinWidth="800">
+        Title="SofreDaar" MinHeight="450" MinWidth="800" Background="Transparent">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:LoginViewModel}">
             <views:Login />
@@ -17,6 +17,13 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush Opacity="0.9" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFCCFFFF" Offset="0.0"/>
+                <GradientStop Color="#CCCCFFFF" Offset="0.5"/>
+                <GradientStop Color="#CCFFFFFF" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
     </Grid>
 </Window>
