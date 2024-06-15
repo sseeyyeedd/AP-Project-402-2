@@ -9,7 +9,7 @@
     <Grid>
 
         <StackPanel FlowDirection="RightToLeft" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border CornerRadius="30" BorderThickness="1" BorderBrush="Gray">
+            <Border Background="#F5F7FA" CornerRadius="30">
                 <StackPanel Margin="30">
                     <TextBlock FontSize="30" HorizontalAlignment="Center">سفره دار</TextBlock>
                     <Label Content="نام کاربری"></Label>
