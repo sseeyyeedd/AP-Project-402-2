@@ -1,4 +1,5 @@
 ﻿using SofreDaar.Infrastructure;
+using SofreDaar.Models.Base;
 using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
@@ -16,19 +17,20 @@ namespace SofreDaar.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        public User? LoggedInUser { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand SignUpCommand { get; set; }
-        //public ICommand SettingsCommand { get; set; }
-        
+        public ICommand ConfirmAccountCommand { get; set; }
+        public ICommand SetPasswordCommand { get; set; }
+
         public MainViewModel(DatabaseContext DbContext)
         {
-            {
-                LoginCommand = new RelayCommand(o => CurrentViewModel = new LoginViewModel(DbContext, this));
-                SignUpCommand=new RelayCommand(o => CurrentViewModel=new SignUpViewModel(DbContext, this));
-                CurrentViewModel = new LoginViewModel(DbContext, this);
-            }
-
+            LoggedInUser=null;
+            LoginCommand = new RelayCommand(o => CurrentViewModel = new LoginViewModel(DbContext, this));
+            SignUpCommand=new RelayCommand(o => CurrentViewModel=new SignUpViewModel(DbContext, this));
+            ConfirmAccountCommand=new RelayCommand(o=>CurrentViewModel=new ConfirmEmailViewModel(DbContext, this));
+            SetPasswordCommand=new RelayCommand(o=>CurrentViewModel=new SetPasswordViewModel(DbContext, this));
+            _currentViewModel = new LoginViewModel(DbContext, this);
         }
     }
 }

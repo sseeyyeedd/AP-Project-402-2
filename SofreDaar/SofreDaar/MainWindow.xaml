@@ -15,6 +15,12 @@
         <DataTemplate DataType="{x:Type vm:SignUpViewModel}">
             <views:SignUp />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ConfirmEmailViewModel}">
+            <views:ConfirmEmail />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SetPasswordViewModel}">
+            <views:SetPassword />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.Background>
