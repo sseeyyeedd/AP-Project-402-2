@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SofreDaar.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,27 +13,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SofreDaar.ViewModels;
+
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for SignUp.xaml
+    /// Interaction logic for SetPassword.xaml
     /// </summary>
-    public partial class SignUp : UserControl
+    public partial class SetPassword : UserControl
     {
-        public SignUp()
+        public SetPassword()
         {
             InitializeComponent();
-            DataContextChanged += OnDataContextChanged;
+            DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is SignUpViewModel viewModel)
+            if (DataContext is SetPasswordViewModel viewModel)
             {
                 VM = viewModel;
             }
         }
 
-        public SignUpViewModel VM { get; set; }
+        public SetPasswordViewModel VM { get; set; }
     }
 }

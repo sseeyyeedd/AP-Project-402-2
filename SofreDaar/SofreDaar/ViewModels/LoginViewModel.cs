@@ -1,4 +1,5 @@
 ﻿using SofreDaar.Infrastructure;
+using SofreDaar.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,8 +18,30 @@ namespace SofreDaar.ViewModels
         {
             _username="";
 			_password="";
+            SignUpCommand = new RelayCommand(o =>
+            {
+                MainVM.SignUpCommand.Execute(this);
+            });
 			LoginCommand=new RelayCommand(o=>{
-				
+				MainVM.LoggedInUser= DbContext.Clients.FirstOrDefault(x=>x.Username==Username&&x.Password==Password);
+                MainVM.LoggedInUser??= DbContext.Restaurants.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
+                MainVM.LoggedInUser??= DbContext.Admins.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
+				if (MainVM.LoggedInUser is null)
+				{
+					//wrong username or password error
+				}
+				else if(MainVM.LoggedInUser is Client) 
+				{
+                    //navigate to client dashboard 
+                }
+                else if (MainVM.LoggedInUser is Restaurant)
+                {
+                    //navigate to restaurant dashboard 
+                }
+                else if (MainVM.LoggedInUser is Admin)
+                {
+                    //navigate to admin dashboard 
+                }
             });
 			
         }
@@ -37,6 +60,7 @@ namespace SofreDaar.ViewModels
 			set { _password = value; OnPropertyChanged(); }
 		}
         public ICommand LoginCommand { get; set; }
+        public ICommand SignUpCommand { get; set; }
 
     }
 }
