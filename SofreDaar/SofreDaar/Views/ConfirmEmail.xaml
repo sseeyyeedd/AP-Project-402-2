@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SofreDaar.Views.SignUp"
+﻿<UserControl x:Class="SofreDaar.Views.ConfirmEmail"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,26 +11,29 @@
             <Border Background="#F5F7FA" CornerRadius="30">
                 <StackPanel Margin="30">
                     <TextBlock FontSize="30" HorizontalAlignment="Center">سفره دار</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">
+                        کد تایید حساب کاربری شما به ایمیل
+                        <Label x:Name="emailLabel"></Label>
+                        ارسال شد
+                    </TextBlock>
+                    <Label Content="کد تایید اکانت"></Label>
+                    <TextBox MinWidth="300" Text="{Binding Code}"></TextBox>
+                    <Button x:Name="loginButton" Margin="0,30,0,10" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                        <Label Content="نام"></Label>
-                            <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
+                            <Button Margin="0,0,5,0" Content="ارسال دوباره ایمیل" Command="{Binding LoginCommand}"></Button>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <Label Content="نام خانوادگی"></Label>
-                            <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding LastName}"></TextBox>
+                            <Button Margin="5,0,0,0" Content="ویرایش مشخصات" Command="{Binding SignUpCommand}"></Button>
                         </StackPanel>
-                        
+
                     </Grid>
-                    <Label Content="نام کاربری"></Label>
-                    <TextBox MinWidth="300" x:Name="usernameTextBox" Text="{Binding Username}"></TextBox>
-                    <Label Content="ایمیل"></Label>
-                    <TextBox x:Name="passwordTextBox" Text="{Binding Email}"></TextBox>
-                    <Button x:Name="loginButton" Margin="0,30,0,0" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
+                    
+                    
                 </StackPanel>
 
             </Border>
