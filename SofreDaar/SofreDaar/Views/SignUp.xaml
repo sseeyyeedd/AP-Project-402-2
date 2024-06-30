@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:SofreDaar.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel FlowDirection="RightToLeft" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Border Background="#F5F7FA" CornerRadius="30">
@@ -17,19 +20,26 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                        <Label Content="نام"></Label>
+                            <Label Content="نام"></Label>
                             <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
                         </StackPanel>
-                        <StackPanel Grid.Column="1">
+                        <StackPanel Visibility="{Binding Path=IsClient, 
+                    Converter={StaticResource BoolToVis}}" Grid.Column="1">
                             <Label Content="نام خانوادگی"></Label>
-                            <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding LastName}"></TextBox>
+                            <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding SureName}"></TextBox>
                         </StackPanel>
-                        
+
                     </Grid>
                     <Label Content="نام کاربری"></Label>
                     <TextBox MinWidth="300" x:Name="usernameTextBox" Text="{Binding Username}"></TextBox>
                     <Label Content="ایمیل"></Label>
                     <TextBox x:Name="passwordTextBox" Text="{Binding Email}"></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+
+                        <CheckBox IsChecked="{Binding IsClient}" FlowDirection="LeftToRight"></CheckBox>
+                        <Label>مشتری جدید</Label>
+                    </StackPanel>
+
                     <Button x:Name="loginButton" Margin="0,30,0,0" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
                 </StackPanel>
 

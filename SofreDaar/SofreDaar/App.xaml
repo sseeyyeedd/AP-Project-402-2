@@ -105,6 +105,48 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Name="Border"
+                                    Width="20"
+                                    Height="20"
+                                    BorderBrush="#A0A0A0"
+                                    BorderThickness="1"
+                                    Background="Transparent"
+                                    CornerRadius="3">
+                                    <Path Name="CheckMark"
+                                      Data="M0,8 L2,10 L5,6"
+                                      Stretch="Uniform"
+                                      Stroke="#34495E"
+                                      StrokeThickness="2"
+                                      Visibility="Hidden" />
+                                </Border>
+                                <ContentPresenter VerticalAlignment="Center"
+                                              Margin="5,0,0,0" />
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#34495E"/>
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="CheckMark" Property="Stroke" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                                    <Setter Property="Foreground" Value="#34495E"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
