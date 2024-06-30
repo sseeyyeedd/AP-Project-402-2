@@ -26,13 +26,14 @@ namespace SofreDaar.ViewModels
 				MainVM.LoggedInUser= DbContext.Clients.FirstOrDefault(x=>x.Username==Username&&x.Password==Password);
                 MainVM.LoggedInUser??= DbContext.Restaurants.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
                 MainVM.LoggedInUser??= DbContext.Admins.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
+                
 				if (MainVM.LoggedInUser is null)
 				{
 					//wrong username or password error
 				}
 				else if(MainVM.LoggedInUser is Client) 
 				{
-                    //navigate to client dashboard 
+                    //navigate to client dashboard
                 }
                 else if (MainVM.LoggedInUser is Restaurant)
                 {
@@ -42,6 +43,7 @@ namespace SofreDaar.ViewModels
                 {
                     //navigate to admin dashboard 
                 }
+				MainVM.LoginCommand.Execute(o);
             });
 			
         }
