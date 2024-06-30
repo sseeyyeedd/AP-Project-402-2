@@ -5,12 +5,12 @@ namespace SofreDaar.Helpers;
 
 public class Email
 {
-    static string GenerateVerificationCode()
+    public static string GenerateVerificationCode()
     {
         Random random = new Random();
         return random.Next(100000, 999999).ToString();
     }
-    static void SendVerificationEmail(string recipientEmail, string code)
+    public static void SendVerificationEmail(string recipientEmail, string code)
     {
         try
         {

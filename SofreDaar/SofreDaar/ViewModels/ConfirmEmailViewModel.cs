@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
 {
@@ -11,6 +12,17 @@ namespace SofreDaar.ViewModels
     {
         public ConfirmEmailViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
+            _code="";
+            ConfirmCommand = new RelayCommand(o =>
+            {
+                if (!MainVM.LoggedInUser.Activate(Code))
+                {
+                    //show error
+                    return;
+                }
+                
+                MainVM.SetPasswordCommand.Execute(o);
+            });
             
         }
         public string? GetEmail()
@@ -21,5 +33,14 @@ namespace SofreDaar.ViewModels
             }
             return MainVM.LoggedInUser.Email??"";
         }
+
+        private string _code;
+
+        public string Code
+        {
+            get { return _code; }
+            set { _code = value; OnPropertyChanged(); }
+        }
+        public ICommand ConfirmCommand { get; set; }
     }
 }

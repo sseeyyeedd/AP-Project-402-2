@@ -15,15 +15,15 @@ namespace SofreDaar.Models.Base
         public string? Password { get; set; }
         public string? Email { get; set; }
         [MaxLength(6)]
-        public string? ActivationCode { get; set; }
+        public string? VerificationCode { get; set; }
         [MaxLength(11)]
         public string? PhoneNumber { get; set; }
 
         public bool Activate(string code)
         {
-            if (code == ActivationCode)
+            if (code == VerificationCode)
             {
-                ActivationCode = "0";
+                VerificationCode = "0";
                 return true;
             }
             return false;
