@@ -12,7 +12,7 @@ public class Order:Base.Entity
     public Guid ClientId { get; set; }
     public Commnet Commnet { get; set; }
     public Guid CommentId { get; set; }
-    public ICollection<Food> Foods { get; set; }
+    public ICollection<OrderItem> OrderItems { get; set; }
     public bool IsReservation { get; set; }
     public DateTime DateTime { get; set; }
     public bool IsPaymentInCash { get; set; }

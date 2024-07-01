@@ -43,7 +43,7 @@ namespace SofreDaar.ViewModels
                 {
                     //navigate to admin dashboard 
                 }
-				MainVM.LoginCommand.Execute(o);
+				MainVM.DashboardCommand.Execute(o);
             });
 			
         }

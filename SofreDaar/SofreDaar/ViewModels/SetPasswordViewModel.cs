@@ -14,10 +14,10 @@ namespace SofreDaar.ViewModels
         public SetPasswordViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
             _password="";
-            _confirmPassword="";
+            _repeatPassword="";
             SetPasswordCommand = new RelayCommand(o =>
             {
-                if (Password != ConfirmPassword)
+                if (Password != RepeatPassword)
                 {
                     //show error
                     return;
@@ -25,6 +25,7 @@ namespace SofreDaar.ViewModels
 
                 MainVM.LoggedInUser.Password = Password;
                 DbContext.Clients.Add(MainVM.LoggedInUser as Client);
+                DbContext.SaveChanges();
                 MainVM.LoginCommand.Execute(o);
             });
 
@@ -37,12 +38,12 @@ namespace SofreDaar.ViewModels
             set { _password = value; OnPropertyChanged(); }
         }
         
-        private string _confirmPassword;
+        private string _repeatPassword;
         
-        public string ConfirmPassword
+        public string RepeatPassword
         {
-            get { return _confirmPassword; }
-            set { _confirmPassword = value; OnPropertyChanged(); }
+            get { return _repeatPassword; }
+            set { _repeatPassword = value; OnPropertyChanged(); }
         }
         
         public ICommand SetPasswordCommand { get; set; }

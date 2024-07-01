@@ -17,24 +17,24 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for ConfirmEmail.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class ConfirmEmail : UserControl
+    public partial class Profile : UserControl
     {
-        public ConfirmEmail()
+        public Profile()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ConfirmEmailViewModel viewModel)
+            if (DataContext is ProfileViewModel viewModel)
             {
                 VM = viewModel;
-                emailLabel.Text=(VM.GetEmail()??"");
             }
         }
 
-        public ConfirmEmailViewModel VM { get; set; }
+
+        public ProfileViewModel VM { get; set; }
     }
 }

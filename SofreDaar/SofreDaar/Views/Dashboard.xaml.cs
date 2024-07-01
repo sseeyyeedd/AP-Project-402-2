@@ -17,24 +17,29 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for ConfirmEmail.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class ConfirmEmail : UserControl
+    public partial class Dashboard : UserControl
     {
-        public ConfirmEmail()
+        public Dashboard()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ConfirmEmailViewModel viewModel)
+            if (DataContext is DashboardViewModel viewModel)
             {
                 VM = viewModel;
-                emailLabel.Text=(VM.GetEmail()??"");
             }
         }
+        
+        
+        public DashboardViewModel VM { get; set; }
 
-        public ConfirmEmailViewModel VM { get; set; }
+        private void NavigationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VM.ChangeNavigationCommand.Execute(this);
+        }
     }
 }

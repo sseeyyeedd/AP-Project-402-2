@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type vm:SetPasswordViewModel}">
             <views:SetPassword />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:Dashboard />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.Background>

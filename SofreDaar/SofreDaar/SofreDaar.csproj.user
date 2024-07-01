@@ -10,7 +10,13 @@
     <Compile Update="Views\ConfirmEmail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Dashboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Profile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\SetPassword.xaml.cs">
@@ -27,7 +33,13 @@
     <Page Update="Views\ConfirmEmail.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Profile.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SetPassword.xaml">
