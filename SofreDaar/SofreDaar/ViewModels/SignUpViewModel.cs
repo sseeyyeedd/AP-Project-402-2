@@ -16,8 +16,7 @@ namespace SofreDaar.ViewModels
             _username="";
             _email="";
             _phoneNumber="";
-            _isClient=true;
-            SendCodeCommand =new RelayCommand(o =>
+            SendCodeCommand =new RelayCommand(async o =>
             {
                 //Check all Inputs
                 
@@ -55,7 +54,7 @@ namespace SofreDaar.ViewModels
                 MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email};
                 //send verification code
                 MainVM.LoggedInUser.VerificationCode = Helpers.Email.GenerateVerificationCode();
-                Helpers.Email.SendVerificationEmail(Email, MainVM.LoggedInUser.VerificationCode);
+                await Helpers.Email.SendVerificationEmailAsync(Email, MainVM.LoggedInUser.VerificationCode);
                 
                 MainVM.ConfirmAccountCommand.Execute(o);
             });
@@ -103,14 +102,6 @@ namespace SofreDaar.ViewModels
         {
             get { return _phoneNumber; }
             set { _phoneNumber = value; OnPropertyChanged(); }
-        }
-
-        private bool _isClient;
-
-        public bool IsClient
-        {
-            get { return _isClient; }
-            set { _isClient = value;OnPropertyChanged(); }
         }
         public ICommand SendCodeCommand { get; set; }
     }

@@ -32,9 +32,17 @@ namespace SofreDaar.Infrastructure
                 .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
-                entity
-                .HasMany(x => x.Foods)
-                .WithMany(x => x.Orders);
+            });
+            modelBuilder.Entity<OrderItem>(entity =>
+            {
+                entity.HasOne(x => x.Food)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.FoodId)
+                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.Order)
+                .WithMany(x => x.OrderItems)
+                .HasForeignKey(x => x.OrderId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<Food>(entity =>
             {

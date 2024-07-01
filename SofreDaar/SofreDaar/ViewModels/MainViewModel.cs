@@ -22,6 +22,7 @@ namespace SofreDaar.ViewModels
         public ICommand SignUpCommand { get; set; }
         public ICommand ConfirmAccountCommand { get; set; }
         public ICommand SetPasswordCommand { get; set; }
+        public ICommand DashboardCommand { get; set; }
 
         public MainViewModel(DatabaseContext DbContext)
         {
@@ -30,6 +31,7 @@ namespace SofreDaar.ViewModels
             SignUpCommand=new RelayCommand(o => CurrentViewModel=new SignUpViewModel(DbContext, this));
             ConfirmAccountCommand=new RelayCommand(o=>CurrentViewModel=new ConfirmEmailViewModel(DbContext, this));
             SetPasswordCommand=new RelayCommand(o=>CurrentViewModel=new SetPasswordViewModel(DbContext, this));
+            DashboardCommand=new RelayCommand(o=>CurrentViewModel=new DashboardViewModel(DbContext, this));
             _currentViewModel = new LoginViewModel(DbContext, this);
         }
     }

@@ -23,22 +23,19 @@
                             <Label Content="نام"></Label>
                             <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
                         </StackPanel>
-                        <StackPanel Visibility="{Binding Path=IsClient, 
-                    Converter={StaticResource BoolToVis}}" Grid.Column="1">
+                        <StackPanel Grid.Column="1">
                             <Label Content="نام خانوادگی"></Label>
                             <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding SureName}"></TextBox>
                         </StackPanel>
 
                     </Grid>
                     <Label Content="نام کاربری"></Label>
-                    <TextBox MinWidth="300" x:Name="usernameTextBox" Text="{Binding Username}"></TextBox>
+                    <TextBox MinWidth="300" Text="{Binding Username}"></TextBox>
                     <Label Content="ایمیل"></Label>
-                    <TextBox x:Name="passwordTextBox" Text="{Binding Email}"></TextBox>
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-
-                        <CheckBox IsChecked="{Binding IsClient}" FlowDirection="LeftToRight"></CheckBox>
-                        <Label>مشتری جدید</Label>
-                    </StackPanel>
+                    <TextBox Text="{Binding Email}"></TextBox>
+                    <Label Content="شماره تلفن"></Label>
+                    <TextBox Text="{Binding PhoneNumber}"></TextBox>
+                   
 
                     <Button x:Name="loginButton" Margin="0,30,0,0" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
                 </StackPanel>

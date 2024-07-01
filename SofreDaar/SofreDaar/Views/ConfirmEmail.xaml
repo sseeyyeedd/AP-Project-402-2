@@ -13,12 +13,12 @@
                     <TextBlock FontSize="30" HorizontalAlignment="Center">سفره دار</TextBlock>
                     <TextBlock HorizontalAlignment="Center">
                         کد تایید حساب کاربری شما به ایمیل
-                        <Label x:Name="emailLabel"></Label>
+                        <TextBlock x:Name="emailLabel"></TextBlock>
                         ارسال شد
                     </TextBlock>
                     <Label Content="کد تایید اکانت"></Label>
                     <TextBox MinWidth="300" Text="{Binding Code}"></TextBox>
-                    <Button x:Name="loginButton" Margin="0,30,0,10" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
+                    <Button x:Name="loginButton" Margin="0,30,0,10" Content="بررسی کد" Command="{Binding ConfirmCommand}"></Button>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
