@@ -16,5 +16,6 @@ public class Food:Base.Entity
     public string FoodType { get; set; }
     public ICollection<OrderItem> Orders { get; set; }
     public ICollection<Commnet> Commnets { get; set; }
+    public ICollection<Rating> Ratings { get; set; }
     public int Stock { get; set; }
 }

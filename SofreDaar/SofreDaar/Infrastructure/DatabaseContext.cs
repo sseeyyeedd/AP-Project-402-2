@@ -14,12 +14,16 @@ namespace SofreDaar.Infrastructure
         public DbSet<Client> Clients { get; set; }
         public DbSet<Food> Foods { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Commnet> Commnets { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Admin>()
+                .HasData(new Admin() { Id = Guid.NewGuid() ,Email="admin@email.com",Username="admin",Password="123456",PhoneNumber="09999999999",Name="Admin",VerificationCode="0"});
             modelBuilder.Entity<Order>(entity =>
             {
                 entity
@@ -59,11 +63,6 @@ namespace SofreDaar.Infrastructure
                     .WithMany(x => x.Commnets)
                     .HasForeignKey(x => x.FoodId);
                 entity
-                .HasOne(x => x.Order)
-                .WithOne(x => x.Commnet)
-                .HasForeignKey<Commnet>(x => x.OrderId)
-                .OnDelete(DeleteBehavior.Restrict);
-                entity
                 .HasOne(x => x.ReplayTo)
                 .WithMany(x => x.Replays)
                 .HasForeignKey(x => x.ReplayToId)
@@ -86,13 +85,28 @@ namespace SofreDaar.Infrastructure
                 .HasForeignKey(x => x.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
+            modelBuilder.Entity<Rating>(entity =>
+            {
+                entity
+                .HasOne(x => x.Food)
+                .WithMany(x => x.Ratings)
+                .HasForeignKey(x => x.FoodId)
+                .OnDelete(DeleteBehavior.Restrict);
+                entity
+                .HasOne(x=>x.Client)
+                .WithMany(x=>x.Ratings)
+                .HasForeignKey(x=>x.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Client>().ToTable("Clients");
             modelBuilder.Entity<Restaurant>().ToTable("Restaurants");
             modelBuilder.Entity<Food>().ToTable("Foods");
             modelBuilder.Entity<Order>().ToTable("Orders");
+            modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
             modelBuilder.Entity<Commnet>().ToTable("Comments");
             modelBuilder.Entity<Report>().ToTable("Reports");
+            modelBuilder.Entity<Rating>().ToTable("Ratings");
         }
     }
 }
