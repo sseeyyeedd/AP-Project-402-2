@@ -1,4 +1,5 @@
 ﻿using SofreDaar.Infrastructure;
+using SofreDaar.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace SofreDaar.ViewModels
             _code="";
             ConfirmCommand = new RelayCommand(o =>
             {
-                if (!MainVM.LoggedInUser.Activate(Code))
+                if (!((Client)MainVM.LoggedInUser).Activate(Code))
                 {
                     //show error
                     return;
@@ -31,7 +32,7 @@ namespace SofreDaar.ViewModels
             {
                 return "";
             }
-            return MainVM.LoggedInUser.Email??"";
+            return ((Client)MainVM.LoggedInUser).Email??"";
         }
 
         private string _code;

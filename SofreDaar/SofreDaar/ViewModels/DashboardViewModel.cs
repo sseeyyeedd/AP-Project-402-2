@@ -32,7 +32,7 @@ namespace SofreDaar.ViewModels
             }
             else if (MainVM.LoggedInUser is Admin)
             {
-                NavigationItems.Add(new NavigationItem("پروفایل", RestaurantManagment));
+                NavigationItems.Add(new NavigationItem("مدیریت رستوران", RestaurantManagment));
             }
         }
         public ObservableCollection<NavigationItem> NavigationItems { get; set; } = [];

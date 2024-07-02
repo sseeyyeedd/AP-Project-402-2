@@ -1,4 +1,5 @@
-﻿using SofreDaar.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using SofreDaar.Helpers;
 using SofreDaar.Infrastructure;
 using SofreDaar.Models;
 using System;
@@ -15,6 +16,8 @@ namespace SofreDaar.ViewModels
     {
         public RestaurantManagmentViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
+            Restaurants=new ObservableCollection<Restaurant>(DbContext.Restaurants);
+            Restaurants??= [];
             AddRestaurantCommand=new RelayCommand(o =>
             {
                 if (!Name.IsName())
@@ -33,12 +36,17 @@ namespace SofreDaar.ViewModels
                     Name=Name,
                     Username=Username,
                     Password=Password,
-                    City=City
-
+                    City=City,
+                    Address="",
+                    ReceptionType=Models.Base.RestaurantReceptionType.DineIn
                 };
                 DbContext.Restaurants.Add(restaurant);
                 DbContext.SaveChanges();
                 Restaurants.Add(restaurant);
+                Name="";
+                Username="";
+                Password="";
+                City="";
             });
             
         }
@@ -48,6 +56,13 @@ namespace SofreDaar.ViewModels
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged(); }
+        }
+        private string _nameSearch;
+
+        public string NameSearch
+        {
+            get { return _nameSearch; }
+            set { _nameSearch = value; OnPropertyChanged(); }
         }
         private string _username;
 
@@ -63,12 +78,31 @@ namespace SofreDaar.ViewModels
             get { return _city; }
             set { _city = value; OnPropertyChanged(); }
         }
+        private string _citySearch;
+
+        public string CitySearch
+        {
+            get { return _citySearch; }
+            set { _citySearch = value; OnPropertyChanged(); }
+        }
+        private double _rating;
+
+        public double RatingSearch
+        {
+            get { return _rating; }
+            set { _rating = value; OnPropertyChanged(); }
+        }
         private string _password;
 
         public string Password
         {
             get { return _password; }
             set { _password = value; OnPropertyChanged(); }
+        }
+        public void UpdatePassword(Restaurant restaurant)
+        {
+            Context.Restaurants.Update(restaurant);
+            Context.SaveChanges();
         }
         public ICommand AddRestaurantCommand { get; set; }
         public ObservableCollection<Restaurant> Restaurants { get; set; }
