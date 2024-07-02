@@ -20,31 +20,21 @@ namespace SofreDaar.Helpers
         {
             try
             {
-                MailMessage mail = new MailMessage
-                {
-                    From = new MailAddress("mail@sseeyyeedd.ir"),
-                    Subject = "Email Verification",
-                    Body = "Your verification code is: " + code
-                };
+                MailMessage mail = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient("mail.sseeyyeedd.ir");
+                mail.From = new MailAddress("mail@sseeyyeedd.ir");
                 mail.To.Add(recipientEmail);
-
-                using (SmtpClient smtpClient = new SmtpClient("mail.sseeyyeedd.ir", 587)) // Using port 587 for SMTP
-                {
-                    smtpClient.UseDefaultCredentials = false;
-                    smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
-                    smtpClient.EnableSsl = false; // Non-SSL configuration
-                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-                    // Logging the attempt to send email
-                    Console.WriteLine($"Attempting to send email to {recipientEmail}");
-
-                    await smtpClient.SendMailAsync(mail);
-
-                    // Logging success
-                    Console.WriteLine("Verification email sent successfully.");
-                }
+                mail.Subject = "Email Verification";
+                mail.Body = "Your verification code is: " + code;
+                smtpClient.Port = 587;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(mail);
 
                 Console.WriteLine("Verification email sent.");
+                
+                
             }
             catch (Exception ex)
             {
