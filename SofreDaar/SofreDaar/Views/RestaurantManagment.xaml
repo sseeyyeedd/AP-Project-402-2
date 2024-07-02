@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SofreDaar.Views"
+             xmlns:helpers="clr-namespace:SofreDaar.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,9 +13,44 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <Border FlowDirection="RightToLeft" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
+        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Content="نام رستوران"></Label>
+                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding NameSearch}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="شهر"></Label>
+                        <TextBox MinWidth="200" Margin="10,0,10,0" Text="{Binding CitySearch}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Content="کمینه امتیاز"></Label>
+                    <TextBox LostFocus="TextBox_LostFocus" MinWidth="200" Margin="10,0,10,0" Text="0">
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Column="3">
+                    <Label Content="وضعیت گزارشات"></Label>
+                    <ComboBox Grid.Row="0" Width="200" Margin="10"
+                  ItemsSource="{Binding FilterReports}"
+                  SelectedItem="{Binding Filter, Mode=TwoWay}"
+                  />
+                   
+                </StackPanel>
+            </Grid>
+                <Button Margin="0,5,0,0" Content="جستجو" Command="{Binding SearchCommand}"></Button>
+            </StackPanel>
+        </Border>
+
+        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
             <DataGrid CanUserAddRows="False" CellEditEnding="DataGrid_CellEditEnding" ItemsSource="{Binding Restaurants}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                
+
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="نام رستوران" Binding="{Binding Name}" Width="*"/>
                     <DataGridTextColumn IsReadOnly="True" Header="شهر" Binding="{Binding City}" Width="*"/>
@@ -23,28 +59,28 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Border Padding="10" Grid.Row="2" Background="#F5F7FA" CornerRadius="30">
+        <Border Margin="5" Padding="10" Grid.Row="2" Background="#F5F7FA" CornerRadius="30">
             <StackPanel FlowDirection="RightToLeft">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <Label Content="نام رستوران"></Label>
-                    <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
-                    <Label Content="نام کاربری"></Label>
-                    <TextBox MinWidth="300" Margin="0,0,10,0" Text="{Binding Username}"></TextBox>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <Label Content="شهر"></Label>
-                    <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding City}"></TextBox>
-                    <Label Content="رمزعبور"></Label>
-                    <TextBox MinWidth="300" Margin="10,0,0,0" Text="{Binding Password}"></TextBox>
-                </StackPanel>
-                
-            </Grid>
-            <Button Margin="0,30,0,0" Content="افزودن رستوران" Command="{Binding AddRestaurantCommand}"></Button>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="نام رستوران"></Label>
+                        <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
+                        <Label Content="نام کاربری"></Label>
+                        <TextBox MinWidth="300" Margin="0,0,10,0" Text="{Binding Username}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="شهر"></Label>
+                        <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding City}"></TextBox>
+                        <Label Content="رمزعبور"></Label>
+                        <TextBox MinWidth="300" Margin="10,0,0,0" Text="{Binding Password}"></TextBox>
+                    </StackPanel>
+
+                </Grid>
+                <Button Margin="0,30,0,0" Content="افزودن رستوران" Command="{Binding AddRestaurantCommand}"></Button>
             </StackPanel>
         </Border>
     </Grid>
