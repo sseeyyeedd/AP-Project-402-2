@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="SofreDaar.Views.RestaurantManagment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SofreDaar.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Restaurants}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="500">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="نام رستوران" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="شهر" Binding="{Binding City}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Background="#F5F7FA" CornerRadius="30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Content="نام رستوران"></Label>
+                    <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="nameTextBox" Text="{Binding Name}"></TextBox>
+                    <Label Content="نام کاربری"></Label>
+                    <TextBox MinWidth="300" Text="{Binding Username}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="شهر"></Label>
+                    <TextBox MinWidth="300" Margin="10,0,0,0" x:Name="lastnameTextBox" Text="{Binding City}"></TextBox>
+                    <Label Content="رمزعبور"></Label>
+                    <TextBox MinWidth="300" Text="{Binding Password}"></TextBox>
+                </StackPanel>
+                <Button Margin="0,30,0,0" Content="افزودن رستوران" Command="{Binding AddRestaurantCommand}"></Button>
+            </Grid>
+
+        </Border>
+    </Grid>
+</UserControl>
