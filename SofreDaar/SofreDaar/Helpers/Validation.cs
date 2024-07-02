@@ -1,5 +1,8 @@
-namespace SofreDaar.Helpers;
+﻿namespace SofreDaar.Helpers;
+
 using System.Text.RegularExpressions;
+
+
 public static class Validation
 {
     public static bool IsName(this string username)
@@ -10,7 +13,7 @@ public static class Validation
     }
     public static bool IsEmail(this string email)   
     {
-        string pattern = @"^[a-zA-Z]{3,32}@[a-zA-Z]{3,32}\.[a-zA-Z]{2,3}$";
+        string pattern = @"^[a-zA-Z0-9]{3,32}@[a-zA-Z]{3,32}\.[a-zA-Z]{2,3}$";
         Regex regex = new Regex(pattern);
         return regex.IsMatch(email);
         
