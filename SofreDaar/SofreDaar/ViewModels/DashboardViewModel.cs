@@ -25,6 +25,7 @@ namespace SofreDaar.ViewModels
             if (MainVM.LoggedInUser is Client)
             {
                 NavigationItems.Add(new NavigationItem("پروفایل", Profile));
+                NavigationItems.Add(new NavigationItem("ارسال گزارش", SendReport));
             }
             else if (MainVM.LoggedInUser is Restaurant)
             {
@@ -60,6 +61,10 @@ namespace SofreDaar.ViewModels
         void RestaurantManagment()
         {
             CurrentViewModel=new RestaurantManagmentViewModel(Context, MainVM);
+        }
+        void SendReport()
+        {
+            CurrentViewModel=new SendReportViewModel(Context, MainVM);
         }
     }
     public class NavigationItem
