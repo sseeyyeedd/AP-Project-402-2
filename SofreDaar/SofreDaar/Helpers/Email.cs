@@ -11,7 +11,11 @@ namespace SofreDaar.Helpers
             Random random = new Random();
             return random.Next(100000, 999999).ToString();
         }
-
+        public static string GeneratePaymentCode()
+        {
+            Random random = new Random();
+            return random.Next(100000000, 999999999).ToString();
+        }
         public static async Task SendVerificationEmailAsync(string recipientEmail, string code)
         {
             try
