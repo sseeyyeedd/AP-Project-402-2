@@ -39,13 +39,13 @@ namespace SofreDaar.ViewModels
                     return;
                 }
                 //email is not valid and is not unique
-                if (!Email.IsEmail()||DbContext.Clients.Any(x=>x.Email==Email)||DbContext.Restaurants.Any(x=>x.Email==Email)||DbContext.Admins.Any(x=>x.Email==Email))
+                if (!Email.IsEmail()||DbContext.Clients.Any(x=>x.Email==Email))
                 {
                     //show error
                     return;
                 }
                 //phone number is not valid and is not unique
-                if (!PhoneNumber.IsPhoneNumber()||DbContext.Clients.Any(x=>x.PhoneNumber==PhoneNumber)||DbContext.Restaurants.Any(x=>x.PhoneNumber==PhoneNumber))
+                if (!PhoneNumber.IsPhoneNumber()||DbContext.Clients.Any(x=>x.PhoneNumber==PhoneNumber))
                 {
                     //show error
                     return;
@@ -53,8 +53,8 @@ namespace SofreDaar.ViewModels
                 //if inputs are correct make a user and put it into loggedinuser
                 MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email};
                 //send verification code
-                MainVM.LoggedInUser.VerificationCode = Helpers.Email.GenerateVerificationCode();
-                await Helpers.Email.SendVerificationEmailAsync(Email, MainVM.LoggedInUser.VerificationCode);
+                ((Client)MainVM.LoggedInUser).VerificationCode = Helpers.Email.GenerateVerificationCode();
+                await Helpers.Email.SendVerificationEmailAsync(Email, ((Client)MainVM.LoggedInUser).VerificationCode);
                 
                 MainVM.ConfirmAccountCommand.Execute(o);
             });

@@ -4,9 +4,9 @@ public static class Validation
 {
     public static bool IsName(this string username)
     {
-        string pattern = @"^[a-zA-Z]{3,32}$";
+        string pattern = @"^[a-zA-Z\u0600-\u06FF\s]{3,32}$";
         Regex regex = new Regex(pattern);
-        return regex.IsMatch(username);        
+        return regex.IsMatch(username);
     }
     public static bool IsEmail(this string email)   
     {

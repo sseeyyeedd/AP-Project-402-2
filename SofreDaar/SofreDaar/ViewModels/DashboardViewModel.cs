@@ -1,5 +1,6 @@
 ﻿using SofreDaar.Infrastructure;
 using SofreDaar.Models;
+using SofreDaar.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,7 +32,7 @@ namespace SofreDaar.ViewModels
             }
             else if (MainVM.LoggedInUser is Admin)
             {
-
+                NavigationItems.Add(new NavigationItem("مدیریت رستوران", RestaurantManagment));
             }
         }
         public ObservableCollection<NavigationItem> NavigationItems { get; set; } = [];
@@ -55,6 +56,10 @@ namespace SofreDaar.ViewModels
         void Profile()
         {
             CurrentViewModel=new ProfileViewModel(Context, MainVM);
+        }
+        void RestaurantManagment()
+        {
+            CurrentViewModel=new RestaurantManagmentViewModel(Context, MainVM);
         }
     }
     public class NavigationItem

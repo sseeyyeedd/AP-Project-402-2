@@ -14,20 +14,20 @@ namespace SofreDaar.ViewModels
     {
         public ProfileViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
-            _name = MainVM.LoggedInUser.Name;
-            _surname = MainVM.LoggedInUser.SureName;
-            _phoneNumber = MainVM.LoggedInUser.PhoneNumber;
+            _name = ((Client)MainVM.LoggedInUser).Name;
+            _surname = ((Client)MainVM.LoggedInUser).SureName;
+            _phoneNumber = ((Client)MainVM.LoggedInUser).PhoneNumber;
             _username = MainVM.LoggedInUser.Username;
-            _email = MainVM.LoggedInUser.Email;
+            _email = ((Client)MainVM.LoggedInUser).Email;
             _address = "";
             UpgradeToGoldCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Gold);
             UpgradeToSilverCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Silver);
             UpgradeToBronzeCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Bronze);
             SaveCommand = new RelayCommand(o =>
             {
-                MainVM.LoggedInUser.PhoneNumber = PhoneNumber;
+                ((Client)MainVM.LoggedInUser).PhoneNumber = PhoneNumber;
                 MainVM.LoggedInUser.Username = Username;
-                MainVM.LoggedInUser.Email = Email;
+                ((Client)MainVM.LoggedInUser).Email = Email;
                 if (MainVM.LoggedInUser is Client)
                 {
                     ((Client)MainVM.LoggedInUser).Subscription = ((Client)MainVM.LoggedInUser).Subscription;
