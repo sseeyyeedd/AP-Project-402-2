@@ -6,17 +6,30 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
 {
-    public class RestaurantManagmentViewModel:BaseViewModel
+    public class RestaurantManagmentViewModel : BaseViewModel
     {
         public RestaurantManagmentViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
-            Restaurants=new ObservableCollection<Restaurant>(DbContext.Restaurants);
+            FilterReports.Add("همه");
+            FilterReports.Add("بدون گزارش");
+            FilterReports.Add("گزارشات پاسخ داده شده");
+            FilterReports.Add("گزارشات پاسخ داده نشده");
+            RatingSearch=0;
+            Name="";
+            NameSearch="";
+            Username="";
+            Password="";
+            City="";
+            CitySearch="";
+            Filter=FilterReports[0];
+            Restaurants =new ObservableCollection<Restaurant>(DbContext.Restaurants);
             Restaurants??= [];
             AddRestaurantCommand=new RelayCommand(o =>
             {
@@ -43,13 +56,70 @@ namespace SofreDaar.ViewModels
                 DbContext.Restaurants.Add(restaurant);
                 DbContext.SaveChanges();
                 Restaurants.Add(restaurant);
-                Name="";
-                Username="";
-                Password="";
-                City="";
+
             });
-            
+            SearchCommand = new RelayCommand(o =>
+{
+    Restaurants =new ObservableCollection<Restaurant>(DbContext.Restaurants);
+
+    var array = FilterReports.ToArray();
+    if (Filter == array[1])
+    {
+        Restaurants = new ObservableCollection<Restaurant>(
+            Restaurants.Where(x =>
+                (x.Reports==null||x.Reports.Count == 0) &&
+                x.Name.Contains(NameSearch) &&
+                x.City.Contains(CitySearch) &&
+                ((x.Foods!=null ? x.Foods.Average(y => y.Ratings!=null ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
+            )
+        );
+    }
+    else if (Filter == array[2])
+    {
+        Restaurants = new ObservableCollection<Restaurant>(
+            Restaurants.Where(x =>
+                x.Reports!=null&&
+                x.Reports.Any(y => y.IsFollowedUp) &&
+                x.Name.Contains(NameSearch) &&
+                x.City.Contains(CitySearch) &&
+                ((x.Foods!=null ? x.Foods.Average(y => y.Ratings!=null ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
+            )
+        );
+    }
+    else if (Filter == array[3])
+    {
+        Restaurants = new ObservableCollection<Restaurant>(
+            Restaurants.Where(x =>
+                x.Reports!=null&&
+                x.Reports.Any(y => !y.IsFollowedUp) &&
+                x.Name.Contains(NameSearch) &&
+                x.City.Contains(CitySearch) &&
+                ((x.Foods!=null ? x.Foods.Average(y => y.Ratings!=null ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
+            )
+        );
+    }
+    else
+    {
+        Restaurants = new ObservableCollection<Restaurant>(
+            Restaurants.Where(x =>
+                x.Name.Contains(NameSearch) &&
+                x.City.Contains(CitySearch) &&
+                ((x.Foods!=null ? x.Foods.Average(y => y.Ratings!=null ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
+            )
+        );
+    }
+});
+
         }
+        public ObservableCollection<string> FilterReports { get; set; } = [];
+        private string _filter;
+
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; OnPropertyChanged(); }
+        }
+
         private string _name;
 
         public string Name
@@ -105,6 +175,15 @@ namespace SofreDaar.ViewModels
             Context.SaveChanges();
         }
         public ICommand AddRestaurantCommand { get; set; }
-        public ObservableCollection<Restaurant> Restaurants { get; set; }
+        public ICommand SearchCommand { get; set; }
+        private ObservableCollection<Restaurant> _restaurants;
+
+        public ObservableCollection<Restaurant> Restaurants
+        {
+            get { return _restaurants; }
+            set { _restaurants = value; OnPropertyChanged(); }
+        }
+
     }
+
 }

@@ -57,5 +57,19 @@ namespace SofreDaar.Views
                 }
             }
         }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            double value = 0;
+            if (double.TryParse(((TextBox)sender).Text, out value))
+            {
+                VM.RatingSearch=value;
+            }
+            else
+            {
+                VM.RatingSearch=value;
+                ((TextBox)sender).Text="0";
+            }
+        }
     }
 }
