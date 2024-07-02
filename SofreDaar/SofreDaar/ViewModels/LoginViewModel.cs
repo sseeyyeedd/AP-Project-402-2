@@ -30,19 +30,9 @@ namespace SofreDaar.ViewModels
 				if (MainVM.LoggedInUser is null)
 				{
 					//wrong username or password error
+					return;
 				}
-				else if(MainVM.LoggedInUser is Client) 
-				{
-                    //navigate to client dashboard
-                }
-                else if (MainVM.LoggedInUser is Restaurant)
-                {
-                    //navigate to restaurant dashboard 
-                }
-                else if (MainVM.LoggedInUser is Admin)
-                {
-                    //navigate to admin dashboard 
-                }
+				
 				MainVM.DashboardCommand.Execute(o);
             });
 			
