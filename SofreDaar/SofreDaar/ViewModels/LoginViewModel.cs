@@ -22,18 +22,18 @@ namespace SofreDaar.ViewModels
             {
                 MainVM.SignUpCommand.Execute(this);
             });
-            LoginCommand=new RelayCommand(o=>{
-	            MainVM.LoggedInUser= DbContext.Clients.FirstOrDefault(x=>x.Username==Username&&x.Password==Password);
-	            MainVM.LoggedInUser??= DbContext.Restaurants.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
-	            MainVM.LoggedInUser??= DbContext.Admins.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
-    
-	            if (MainVM.LoggedInUser is null)
-	            {
-		            //wrong username or password error
-		            return;
-	            }
-  
-	            MainVM.DashboardCommand.Execute(o);
+			LoginCommand=new RelayCommand(o=>{
+				MainVM.LoggedInUser= DbContext.Clients.FirstOrDefault(x=>x.Username==Username&&x.Password==Password);
+                MainVM.LoggedInUser??= DbContext.Restaurants.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
+                MainVM.LoggedInUser??= DbContext.Admins.FirstOrDefault(x => x.Username==Username&&x.Password==Password);
+                
+				if (MainVM.LoggedInUser is null)
+				{
+					//wrong username or password error
+					return;
+				}
+				
+				MainVM.DashboardCommand.Execute(o);
             });
 			
         }
