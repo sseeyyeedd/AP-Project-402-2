@@ -8,7 +8,7 @@ public static class Validation
         Regex regex = new Regex(pattern);
         return regex.IsMatch(username);        
     }
-    public static bool IsEmail(this string email)
+    public static bool IsEmail(this string email)   
     {
         string pattern = @"^[a-zA-Z]{3,32}@[a-zA-Z]{3,32}\.[a-zA-Z]{2,3}$";
         Regex regex = new Regex(pattern);
