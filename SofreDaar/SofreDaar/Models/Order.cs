@@ -18,6 +18,7 @@ public class Order:Base.Entity
     public DateTime ReserveDateTime { get; set; }
     public bool IsPaymentInCash { get; set; }
     public int PaymentValue { get; set; }
+    public string OrderComment { get; set; }
     public bool CompletePayment(string code)
     {
         if (code == PaymentCode)
