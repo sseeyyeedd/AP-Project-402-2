@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SofreDaar.ViewModels
 {
-    public class ReportManagement:BaseViewModel
+    public class ReportManagementViewModel : BaseViewModel
     {
-        public ReportManagement(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
+        public ReportManagementViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
             
         }

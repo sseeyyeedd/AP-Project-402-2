@@ -18,42 +18,45 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for ReportManagement.xaml
+    /// Interaction logic for CategoryManagement.xaml
     /// </summary>
-    public partial class ReportManagement : UserControl
+    public partial class CategoryManagement : UserControl
     {
-        public ReportManagement()
+        public CategoryManagement()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is ReportManagementViewModel viewModel)
+            if (DataContext is CategoryManagementViewModel viewModel)
             {
                 VM = viewModel;
             }
         }
 
 
-        public ReportManagementViewModel VM { get; set; }
+        public CategoryManagementViewModel VM { get; set; }
+        private void DataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
+        {
+
+        }
 
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             var dataGrid = (DataGrid)sender;
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var editedItem = e.Row.Item as Report;
+                var editedItem = e.Row.Item as Restaurant;
                 if (editedItem != null)
                 {
                     var textBox = e.EditingElement as TextBox;
                     if (textBox != null)
                     {
                         var newValue = textBox.Text;
-                        editedItem.Answer = newValue;
-                        editedItem.IsFollowedUp=true;
+                        editedItem.Password = newValue;
 
-                        VM.UpdateReport(editedItem);
+                        VM.UpdatePassword(editedItem);
                     }
                 }
             }
