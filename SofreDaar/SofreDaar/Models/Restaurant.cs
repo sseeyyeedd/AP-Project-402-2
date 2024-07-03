@@ -13,4 +13,5 @@ public class Restaurant:Base.User
     public ICollection<Food> Foods { get; set; }
     public ICollection<Order> Orders { get; set; }
     public ICollection<Report> Reports { get; set; }
+    public ICollection<Category> Categories { get; set; }
 }

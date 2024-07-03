@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock>hhhshdhdsdsdsh</TextBlock>
+        <StackPanel FlowDirection="RightToLeft" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="#F5F7FA" CornerRadius="30">
+              
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

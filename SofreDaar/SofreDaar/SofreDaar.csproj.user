@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CategoryManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ConfirmEmail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,7 +19,13 @@
     <Compile Update="Views\Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MenuManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Profile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReportManagement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RestaurantManagment.xaml.cs">
@@ -36,6 +45,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CategoryManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ConfirmEmail.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -45,7 +57,13 @@
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\MenuManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Profile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReportManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RestaurantManagment.xaml">
