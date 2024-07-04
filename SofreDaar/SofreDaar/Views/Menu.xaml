@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="SofreDaar.Views.Menu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SofreDaar.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Border HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel>
+                <Grid FlowDirection="RightToLeft">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="نام غذا"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="دسته بندی"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="قیمت"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="موجودی"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer >
+                    <StackPanel Margin="10">
+                        <ListView SelectedItem="{Binding CurrentFood}" HorizontalContentAlignment="Stretch" x:Name="MenuListView" ItemsSource="{Binding MenuFoods}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border  Background="{TemplateBinding Background}" Height="55" Margin="0,5,0,0" CornerRadius="10">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Background" Value="#34495E"></Setter>
+
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Price}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Stock}"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+
+
+                                            </ControlTemplate>
+
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Background" Value="#34495E"></Setter>
+                                    <Style.Triggers>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Opacity" Value="0.7"/>
+                                            </MultiTrigger.Setters>
+
+                                        </MultiTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+
+                                            <Setter Property="Background" Value="#9B59B6" />
+                                            <Setter Property="Foreground" Value="#F5F7FA" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#9B59B6" />
+                                            <Setter Property="Foreground" Value="#F5F7FA" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+
+        <Border Margin="5" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel FlowDirection="RightToLeft">
+                <StackPanel Visibility="{Binding Path=IsSelected, 
+Converter={StaticResource BoolToVis}}" Orientation="Horizontal">
+                    <StackPanel>
+                        <Label Content="نام غذا"></Label>
+                        <Label MinWidth="300" Margin="0,0,10,0" Content="{Binding CurrentFood.Name}"></Label>
+                    </StackPanel>
+                    <Separator/>
+                    <StackPanel>
+                        <Label Content="مواد اولیه"></Label>
+                        <Label MinWidth="300" Margin="0,0,10,0" Content="{Binding CurrentFood.RawMaterials}"></Label>
+                    </StackPanel>
+                    <Separator/>
+                    <StackPanel>
+                        <Label Content="امتیازکل"></Label>
+                        <Label MinWidth="300" Margin="0,0,10,0" Content="{Binding Rating}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=CanRate, 
+Converter={StaticResource BoolToVis}}">
+                        <Button Content="+" Width="30" Command="{Binding AddStarCommand}"></Button>
+                        <TextBox IsReadOnly="True" Text="{Binding NewRating}"></TextBox>
+                        <Button Content="-" Width="30" Command="{Binding RemoveStarCommand}"></Button>
+                        
+                    </StackPanel>
+                   
+                </StackPanel>
+                <Separator Visibility="{Binding Path=IsSelected, 
+Converter={StaticResource BoolToVis}}"/>
+                <StackPanel>
+
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="دسته"></Label>
+                        <ComboBox Grid.Row="0" Width="200" Margin="10"
+                         ItemsSource="{Binding Categories}"
+                         SelectedItem="{Binding Category, Mode=TwoWay}"
+                         DisplayMemberPath="Title"
+                         />
+                        <Button Margin="0,30,0,0" Content="کامنت ها" Command="{Binding ShowCommentsCommand}"></Button>
+                    </StackPanel>
+             
+                    <StackPanel Grid.Column="1">
+                        <Image Source="{Binding CurrentFood.ImageAddress}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Image>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <StackPanel Visibility="{Binding Path=IsSelected, 
+Converter={StaticResource BoolToVis}}">
+                            <Label Content="تعداد غذا برای افزودن به سبد"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Width="30" Content="+" Padding="10" Command="{Binding AddFoodCommand}"></Button>
+                                <TextBox IsReadOnly="True" Text="{Binding FoodCount}"></TextBox>
+                                <Button Width="30" Content="-" Command="{Binding RemoveFoodCommand}"></Button>
+                            </StackPanel>
+                            <Button Margin="0,10,0,0" Grid.Column="3" Content="افزودن" Command="{Binding AddToCartCommand}"></Button>
+                        </StackPanel>
+                        
+                        <Button Margin="0,10,0,0" Grid.Column="3" Content="تکمیل خرید" Command="{Binding CartCommand}"></Button>
+                    </StackPanel>
+                </Grid>
+            
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

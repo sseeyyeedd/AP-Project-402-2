@@ -66,7 +66,7 @@ namespace SofreDaar.ViewModels
         }
         void RestaurantSearch()
         {
-            CurrentViewModel=new RestaurantSearchViewModel(Context, MainVM);
+            CurrentViewModel=new RestaurantSearchViewModel(Context, MainVM,this);
         }
         void CategoryManagment()
         {

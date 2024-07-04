@@ -57,6 +57,9 @@
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Menu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MenuManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -64,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ReportManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Cart.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RestaurantSearch.xaml">

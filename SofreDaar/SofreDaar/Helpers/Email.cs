@@ -33,13 +33,6 @@ namespace SofreDaar.Helpers
                 smtpClient.Send(mail);
 
                 Console.WriteLine("Verification email sent.");
-<<<<<<< HEAD
-
-
-=======
-                
-                
->>>>>>> origin/develop
             }
             catch (Exception ex)
             {
