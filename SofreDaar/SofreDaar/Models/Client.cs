@@ -10,7 +10,7 @@ public class Client:Base.User
     [Required]
     public ClinetSubscription Subscription { get; set; }
     public DateTime SubscriptionStart { get; set; }
-    public string PaymentCode { get; set; }
+    public int ReservesLeft { get; set; }
     [MaxLength(127)]
     public string? SureName { get; set; }
     public string? Email { get; set; }
@@ -22,15 +22,6 @@ public class Client:Base.User
     public ICollection<Commnet> Commnets { get; set; }
     public ICollection<Report> Reports { get; set; }
     public ICollection<Rating> Ratings { get; set; }
-    public bool CompletePayment(string code)
-    {
-        if (code == PaymentCode)
-        {
-            PaymentCode = "0";
-            return true;
-        }
-        return false;
-    }
 
     public bool Activate(string code)
     {

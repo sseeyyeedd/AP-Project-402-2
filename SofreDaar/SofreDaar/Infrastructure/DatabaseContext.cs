@@ -86,6 +86,11 @@ namespace SofreDaar.Infrastructure
                     .WithMany(x => x.Commnets)
                     .HasForeignKey(x => x.ClientId);
             });
+            modelBuilder.Entity<Restaurant>(entity => {
+                entity.HasMany(x => x.Reports)
+                    .WithOne(x => x.Restaurant)
+                    .HasForeignKey(x => x.RestaurantId);
+            });
             modelBuilder.Entity<Report>(entity =>
             {
                 entity

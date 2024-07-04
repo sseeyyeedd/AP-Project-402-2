@@ -51,7 +51,7 @@ namespace SofreDaar.ViewModels
                     return;
                 }
                 //if inputs are correct make a user and put it into loggedinuser
-                MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email,PostalAddress="",PaymentCode=""};
+                MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email,PostalAddress=""};
                 //send verification code
                 ((Client)MainVM.LoggedInUser).VerificationCode = Helpers.Email.GenerateVerificationCode();
                 await Helpers.Email.SendVerificationEmailAsync(Email, ((Client)MainVM.LoggedInUser).VerificationCode);

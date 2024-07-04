@@ -18,6 +18,15 @@
         <DataTemplate DataType="{x:Type vm:SendReportViewModel}">
             <views:SendReport />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CategoryManagementViewModel}">
+            <views:CategoryManagement />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MenuManagementViewModel}">
+            <views:MenuManagement />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RestaurantSearchViewModel}">
+            <views:RestaurantSearch />
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
