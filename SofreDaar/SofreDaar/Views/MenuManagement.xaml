@@ -11,11 +11,112 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-  
 
-        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
-           
+        
+            
+            <Border HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel>
+                <Grid FlowDirection="RightToLeft">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="نام غذا"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="دسته بندی"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="قیمت"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="موجودی"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer >
+                    <StackPanel Margin="10">
+                        <ListView SelectionChanged="MenuListView_SelectionChanged" SelectedItem="{Binding CurrentFood}" HorizontalContentAlignment="Stretch" x:Name="MenuListView" ItemsSource="{Binding MenuFoods}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="MenuListView_MouseDown" />
+                                    <EventSetter Event="MouseLeftButtonUp" Handler="MenuListView_MouseUp" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border  Background="{TemplateBinding Background}" Height="55" Margin="0,5,0,0" CornerRadius="10">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Background" Value="#34495E"></Setter>
+
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Category.Title}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Price}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Stock}"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+
+
+                                            </ControlTemplate>
+
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Background" Value="#34495E"></Setter>
+                                    <Style.Triggers>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Opacity" Value="0.7"/>
+                                            </MultiTrigger.Setters>
+
+                                        </MultiTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+
+                                            <Setter Property="Background" Value="#9B59B6" />
+                                            <Setter Property="Foreground" Value="#F5F7FA" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#9B59B6" />
+                                            <Setter Property="Foreground" Value="#F5F7FA" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
         </Border>
+        
+       
         <Border Margin="5" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
             <StackPanel FlowDirection="RightToLeft">
                 <Grid>
@@ -24,23 +125,50 @@
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel>
-                        <Label Content="عنوان گزارش"></Label>
-                        <TextBox MinWidth="300" Margin="0,0,10,0" Text="{Binding Title}"></TextBox>
-                        <Label Content="رستوران"></Label>
+                        <Label Content="نام غذا"></Label>
+                        <TextBox MinWidth="300" Margin="0,0,10,0" Text="{Binding CurrentFood.Name}"></TextBox>
+                        <Label Content="دسته"></Label>
                         <ComboBox Grid.Row="0" Width="200" Margin="10"
-                            ItemsSource="{Binding Restaurants}"
-                            SelectedItem="{Binding Restaurant, Mode=TwoWay}"
-                            DisplayMemberPath="Name"
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding Category, Mode=TwoWay}"
+                            DisplayMemberPath="Title"
                             />
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <Label Content="توضیحات"></Label>
-                        <TextBox TextWrapping="Wrap" MinWidth="300" Margin="10,0,0,0" Text="{Binding Description}"></TextBox>
+                        <Label Content="مواد اولیه"></Label>
+                        <TextBox TextWrapping="Wrap" MinWidth="300" Margin="10,0,0,0" Text="{Binding CurrentFood.RawMaterials}"></TextBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <Label Content="موجودی"></Label>
+                                <TextBox MinWidth="300" Margin="0,0,10,0" x:Name="stockTextBox" TextChanged="stockTextBox_TextChanged"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="قیمت"></Label>
+                                <TextBox MinWidth="300" Margin="10,0,0,0" TextChanged="priceTextBox_TextChanged" x:Name="priceTextBox"></TextBox>
+                            </StackPanel>
 
+                        </Grid>
                     </StackPanel>
 
                 </Grid>
-                <Button Margin="0,30,0,0" Content="ارسال گزارش" Command="{Binding AddReportCommand}"></Button>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Margin="0,30,0,0" Content="کامنت ها" Command="{Binding ShowCommentsCommand}"></Button>
+                    <Button Margin="0,30,0,0" Grid.Column="1" Content="انتخاب فایل" Command="{Binding SelectFileCommand}"></Button>
+                    <Button Margin="0,30,0,0" Grid.Column="2" Content="حذف غذا" Command="{Binding DeleteFoodCommand}"></Button>
+                    <Button Margin="0,30,0,0" Grid.Column="3" Content="افزودن" x:Name="addAndUpdateButton" Click="addAndUpdateButton_Click"></Button>
+                   
+                </Grid>
+                
             </StackPanel>
         </Border>
     </Grid>
