@@ -26,10 +26,12 @@ namespace SofreDaar.ViewModels
             {
                 NavigationItems.Add(new NavigationItem("پروفایل", Profile));
                 NavigationItems.Add(new NavigationItem("ارسال گزارش", SendReport));
+                NavigationItems.Add(new NavigationItem("جستجوی رستوران", RestaurantSearch));
             }
             else if (MainVM.LoggedInUser is Restaurant)
             {
-
+                NavigationItems.Add(new NavigationItem("مدیریت دسته ها", CategoryManagment));
+                NavigationItems.Add(new NavigationItem("مدیریت منو", MenuManagment));
             }
             else if (MainVM.LoggedInUser is Admin)
             {
@@ -61,6 +63,18 @@ namespace SofreDaar.ViewModels
         void RestaurantManagment()
         {
             CurrentViewModel=new RestaurantManagmentViewModel(Context, MainVM);
+        }
+        void RestaurantSearch()
+        {
+            CurrentViewModel=new RestaurantSearchViewModel(Context, MainVM);
+        }
+        void CategoryManagment()
+        {
+            CurrentViewModel=new CategoryManagementViewModel(Context, MainVM);
+        }
+        void MenuManagment()
+        {
+            CurrentViewModel=new MenuManagementViewModel(Context, MainVM);
         }
         void SendReport()
         {

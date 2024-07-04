@@ -24,4 +24,10 @@
     <Resource Include="Assets\Vazirmatn-SemiBold.ttf" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\RestaurantSearch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

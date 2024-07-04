@@ -66,6 +66,9 @@
     <Page Update="Views\ReportManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\RestaurantSearch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\RestaurantManagment.xaml">
       <SubType>Designer</SubType>
     </Page>
