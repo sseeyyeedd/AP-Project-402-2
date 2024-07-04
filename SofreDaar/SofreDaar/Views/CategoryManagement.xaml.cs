@@ -42,24 +42,6 @@ namespace SofreDaar.Views
 
         }
 
-        private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            var dataGrid = (DataGrid)sender;
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-                var editedItem = e.Row.Item as Restaurant;
-                if (editedItem != null)
-                {
-                    var textBox = e.EditingElement as TextBox;
-                    if (textBox != null)
-                    {
-                        var newValue = textBox.Text;
-                        editedItem.Password = newValue;
-
-                        VM.UpdatePassword(editedItem);
-                    }
-                }
-            }
-        }
+        
     }
 }
