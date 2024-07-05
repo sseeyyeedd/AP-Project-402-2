@@ -15,182 +15,143 @@ namespace SofreDaar.ViewModels
 {
     public class CartManagmentViewModel : BaseViewModel
     {
-        public CartManagmentViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
+        public CartManagmentViewModel(DatabaseContext DbContext, MainViewModel main, DashboardViewModel dashboard, List<OrderItem> items, Restaurant restaurant) : base(DbContext, main)
         {
-            FilterReports.Add("همه");
-            FilterReports.Add("بدون گزارش");
-            FilterReports.Add("گزارشات پاسخ داده شده");
-            FilterReports.Add("گزارشات پاسخ داده نشده");
-            RatingSearch=0;
-            Name="";
-            NameSearch="";
-            Username="";
-            Password="";
-            City="";
-            CitySearch="";
-            Filter=FilterReports[0];
-            Restaurants =new ObservableCollection<Restaurant>(DbContext.Restaurants);
-            Restaurants??= [];
-            AddRestaurantCommand=new RelayCommand(o =>
+            Date=null;
+            OrderItems=new ObservableCollection<OrderItem>(items);
+            CanReserve=false;
+            IsReserve=false;
+            RName=restaurant.Name;
+            Price=items.Sum(x => x.Food.Price*x.Count);
+            var client = MainVM.LoggedInUser as Client;
+            if (client.ReservesLeft<1||IsMoreThanAMonthAgo(client.SubscriptionStart))
             {
-                if (!Name.IsName())
+                client.Subscription=Models.Base.ClinetSubscription.Normal;
+                client.ReservesLeft=0;
+                Context.Clients.Update(client);
+                Context.SaveChanges();
+            }
+            if (restaurant.ReceptionType!=Models.Base.RestaurantReceptionType.DineIn&&client.Subscription!=Models.Base.ClinetSubscription.Normal)
+            {
+                CanReserve=true;
+            }
+            Func<bool, bool> SaveData = (bool isInCash) =>
+            {
+                if (IsReserve)
                 {
-                    //show error
-                    return;
+                    client.ReservesLeft--;
+                    Context.Clients.Update(client);
                 }
-                if (!Username.IsUsername()||DbContext.Clients.Any(x => x.Username==Username)||DbContext.Restaurants.Any(x => x.Username==Username)||DbContext.Admins.Any(x => x.Username==Username))
+                var newId = Guid.NewGuid();
+                var order = new Order()
                 {
-                    //show error
-                    return;
-                }
-                var restaurant = new Restaurant()
-                {
-                    Id=Guid.NewGuid(),
-                    Name=Name,
-                    Username=Username,
-                    Password=Password,
-                    City=City,
-                    Address="",
-                    ReceptionType=Models.Base.RestaurantReceptionType.DineIn
+                    Id=newId,
+                    ClientId=MainVM.LoggedInUser.Id,
+                    RestaurantId=restaurant.Id,
+                    DateTime=DateTime.Now,
+                    IsPaymentInCash=isInCash,
+                    ReserveStatus=IsReserve ? Models.Base.ReserveStatus.Reserve : Models.Base.ReserveStatus.NotReserve,
+                    ReserveDateTime= IsReserve?((DateTime)Date).AddHours(Hours).AddMinutes(Minutes):DateTime.MinValue,
+                    OrderComment="",
+                    PaymentValue=Price,
+                    CancelDateTime=DateTime.MinValue,
                 };
-                DbContext.Restaurants.Add(restaurant);
-                DbContext.SaveChanges();
-                Restaurants.Add(restaurant);
-
+                Context.Orders.Add(order);
+                Context.SaveChanges();
+                foreach (var item in items)
+                {
+                    item.Food.Stock-=item.Count;
+                    Context.Foods.Update(item.Food);
+                    item.OrderId=newId;
+                    Context.OrderItems.Add(item);
+                }
+                Context.SaveChanges();
+                return true;
+            };
+            OnlinePaymentCommand=new RelayCommand(o =>
+            {
+                if (IsReserve&&Date is null)
+                {
+                    return;
+                }
+                SaveData(false);
+                Email.SendOrderItemEmail(client.Email, items);
+                dashboard.CurrentViewModel=null;
             });
-            SearchCommand = new RelayCommand(o =>
-{
-    Restaurants =new ObservableCollection<Restaurant>(DbContext.Restaurants);
-    foreach (var item in Restaurants)
-    {
-        Context.Entry(item).Collection(x => x.Reports).Load();
-        Context.Entry(item).Collection(x => x.Foods).Load();
-        foreach (var item1 in item.Foods)
-        {
-            Context.Entry(item1).Collection(x => x.Ratings).Load();
+            CashPaymentCommand=new RelayCommand(o =>
+            {
+                if (IsReserve&&Date is null)
+                {
+                    return;
+                }
+                SaveData(true);
+                dashboard.CurrentViewModel=null;
+            });
+           
         }
-    }
-    var array = FilterReports.ToArray();
-    if (Filter == array[1])
-    {
-        Restaurants = new ObservableCollection<Restaurant>(
-            Restaurants.Where(x =>
-                (x.Reports==null||x.Reports.Count == 0) &&
-                x.Name.Contains(NameSearch) &&
-                x.City.Contains(CitySearch) &&
-                ((x.Foods.Count>0 ? x.Foods.Average(y => y.Ratings.Count>0 ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
-            )
-        );
-    }
-    else if (Filter == array[2])
-    {
-        Restaurants = new ObservableCollection<Restaurant>(
-            Restaurants.Where(x =>
-                x.Reports!=null&&
-                x.Reports.Any(y => y.IsFollowedUp) &&
-                x.Name.Contains(NameSearch) &&
-                x.City.Contains(CitySearch) &&
-                ((x.Foods.Count>0 ? x.Foods.Average(y => y.Ratings.Count>0 ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
-            )
-        );
-    }
-    else if (Filter == array[3])
-    {
-        Restaurants = new ObservableCollection<Restaurant>(
-            Restaurants.Where(x =>
-                x.Reports!=null&&
-                x.Reports.Any(y => !y.IsFollowedUp) &&
-                x.Name.Contains(NameSearch) &&
-                x.City.Contains(CitySearch) &&
-                ((x.Foods.Count>0 ? x.Foods.Average(y => y.Ratings.Count>0 ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
-            )
-        );
-    }
-    else
-    {
-        Restaurants = new ObservableCollection<Restaurant>(
-            Restaurants.Where(x =>
-                x.Name.Contains(NameSearch) &&
-                x.City.Contains(CitySearch) &&
-                ((x.Foods.Count>0 ? x.Foods.Average(y => y.Ratings.Count>0 ? y.Ratings.Average(z => z.Star) : 0) : 0) >= RatingSearch)
-            )
-        );
-    }
-});
-
-        }
-        public ObservableCollection<string> FilterReports { get; set; } = [];
-        private string _filter;
-
-        public string Filter
+        bool IsMoreThanAMonthAgo(DateTime dateToCheck)
         {
-            get { return _filter; }
-            set { _filter = value; OnPropertyChanged(); }
+            DateTime currentDate = DateTime.Now;
+            int monthDifference = ((currentDate.Year - dateToCheck.Year) * 12) + currentDate.Month - dateToCheck.Month;
+            return monthDifference > 1 || (monthDifference == 1 && currentDate.Day >= dateToCheck.Day);
+        }
+        public ObservableCollection<OrderItem> OrderItems { get; set; } = [];
+
+
+        private string _rname;
+
+        public string RName
+        {
+            get { return _rname; }
+            set { _rname = value; OnPropertyChanged(); }
         }
 
-        private string _name;
+        private int _price;
 
-        public string Name
+        public int Price
         {
-            get { return _name; }
-            set { _name = value; OnPropertyChanged(); }
+            get { return _price; }
+            set { _price = value; OnPropertyChanged(); }
         }
-        private string _nameSearch;
+        private bool _CanReserve;
 
-        public string NameSearch
+        public bool CanReserve
         {
-            get { return _nameSearch; }
-            set { _nameSearch = value; OnPropertyChanged(); }
+            get { return _CanReserve; }
+            set { _CanReserve = value; OnPropertyChanged(); }
         }
-        private string _username;
+        private bool _isReserve;
 
-        public string Username
+        public bool IsReserve
         {
-            get { return _username; }
-            set { _username = value; OnPropertyChanged(); }
+            get { return _isReserve; }
+            set { _isReserve = value; OnPropertyChanged(); }
         }
-        private string _city;
+        private DateTime? _date;
 
-        public string City
+        public DateTime? Date
         {
-            get { return _city; }
-            set { _city = value; OnPropertyChanged(); }
+            get { return _date; }
+            set { _date = value; OnPropertyChanged(); }
         }
-        private string _citySearch;
+        private int _minutes;
 
-        public string CitySearch
+        public int Minutes
         {
-            get { return _citySearch; }
-            set { _citySearch = value; OnPropertyChanged(); }
+            get { return _minutes; }
+            set { _minutes = value; OnPropertyChanged(); }
         }
-        private double _rating;
+        private int _hours;
 
-        public double RatingSearch
+        public int Hours
         {
-            get { return _rating; }
-            set { _rating = value; OnPropertyChanged(); }
+            get { return _hours; }
+            set { _hours = value; OnPropertyChanged(); }
         }
-        private string _password;
 
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; OnPropertyChanged(); }
-        }
-        public void UpdatePassword(Restaurant restaurant)
-        {
-            Context.Restaurants.Update(restaurant);
-            Context.SaveChanges();
-        }
-        public ICommand AddRestaurantCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
-        private ObservableCollection<Restaurant> _restaurants;
 
-        public ObservableCollection<Restaurant> Restaurants
-        {
-            get { return _restaurants; }
-            set { _restaurants = value; OnPropertyChanged(); }
-        }
+        public ICommand OnlinePaymentCommand { get; set; }
+        public ICommand CashPaymentCommand { get; set; }
 
     }
 

@@ -1,5 +1,4 @@
-﻿using SofreDaar.Models;
-using SofreDaar.ViewModels;
+﻿using SofreDaar.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,60 +17,57 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for RestaurantManagment.xaml
+    /// Interaction logic for MenuManagement.xaml
     /// </summary>
-    public partial class Cart : UserControl
+    public partial class OrdersManagement : UserControl
     {
-        public Cart()
+        private object lastselected;
+        public OrdersManagement()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is CartManagmentViewModel viewModel)
+            if (DataContext is OrdersManagementViewModel viewModel)
             {
                 VM = viewModel;
             }
         }
 
+        public OrdersManagementViewModel VM { get; set; }
 
-        public CartManagmentViewModel VM { get; set; }
-
-
-      
-
-        private void minutesTextBod_TextChanged(object sender, TextChangedEventArgs e)
+        private void priceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             int value = 0;
-            if (int.TryParse(((TextBox)sender).Text, out value)&&value>0&&value<60)
+            if (int.TryParse(((TextBox)sender).Text, out value)&&value>-1)
             {
-                VM.Minutes=value;
+                VM.FromPrice=value;
             }
             else
             {
-                VM.Minutes=value;
+                VM.FromPrice=value;
                 ((TextBox)sender).Text="0";
             }
         }
 
-        private void hoursTextBod_TextChanged(object sender, TextChangedEventArgs e)
+        private void topriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int value =0;
-            if (int.TryParse(((TextBox)sender).Text, out value)&&value>0&&value<24)
+            int value = 0;
+            if (int.TryParse(((TextBox)sender).Text, out value)&&value>0)
             {
-                VM.Hours=value;
+                VM.ToPrice=VM.ToPrice;
             }
             else
             {
-                VM.Hours=value;
+                VM.ToPrice=value;
                 ((TextBox)sender).Text="0";
             }
         }
 
         private void DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
-            ((DatePicker)sender).BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Today));
+        
         }
     }
 }

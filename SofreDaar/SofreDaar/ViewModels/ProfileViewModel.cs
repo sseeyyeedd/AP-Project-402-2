@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using SofreDaar.Models;
 using SofreDaar.Models.Base;
+using SofreDaar.Helpers;
 
 namespace SofreDaar.ViewModels
 {
@@ -19,19 +20,49 @@ namespace SofreDaar.ViewModels
             _phoneNumber = ((Client)MainVM.LoggedInUser).PhoneNumber;
             _username = MainVM.LoggedInUser.Username;
             _email = ((Client)MainVM.LoggedInUser).Email;
-            _address = "";
-            UpgradeToGoldCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Gold);
-            UpgradeToSilverCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Silver);
-            UpgradeToBronzeCommand = new RelayCommand(o => ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Bronze);
+            _address = ((Client)MainVM.LoggedInUser).PostalAddress??"";
+            var g= ((Client)MainVM.LoggedInUser).Gender;
+            if (g==Models.Base.Gender.Male)
+            {
+                _gender="آقا";
+            }
+            else if (g==Models.Base.Gender.Female)
+            {
+                _gender="خانم";
+            }
+            else
+            {
+                _gender="ثبت نشده";
+            }
+            UpgradeToGoldCommand = new RelayCommand( o => { ((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Gold;
+                ((Client)(MainVM.LoggedInUser)).ReservesLeft=15;
+                ((Client)(MainVM.LoggedInUser)).SubscriptionStart=DateTime.Now;
+                 Helpers.Email.SendGoldSubscriptionPaymentEmailAsync(((Client)(MainVM.LoggedInUser)).Email);
+                DbContext.SaveChanges();
+
+            });
+            UpgradeToSilverCommand = new RelayCommand( o => {((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Silver;
+            ((Client)(MainVM.LoggedInUser)).ReservesLeft=5;
+            ((Client)(MainVM.LoggedInUser)).SubscriptionStart=DateTime.Now;
+                 Helpers.Email.SendSilverSubscriptionPaymentEmailAsync(((Client)(MainVM.LoggedInUser)).Email);
+                DbContext.SaveChanges();
+
+            });
+            UpgradeToBronzeCommand = new RelayCommand( o => {((Client)(MainVM.LoggedInUser)).Subscription = ClinetSubscription.Bronze;
+                ((Client)(MainVM.LoggedInUser)).ReservesLeft=2;
+                ((Client)(MainVM.LoggedInUser)).SubscriptionStart=DateTime.Now;
+                 Helpers.Email.SendBrnzeSubscriptionPaymentEmailAsync(((Client)(MainVM.LoggedInUser)).Email);
+                DbContext.SaveChanges();
+
+            });
             SaveCommand = new RelayCommand(o =>
             {
-                ((Client)MainVM.LoggedInUser).PhoneNumber = PhoneNumber;
-                MainVM.LoggedInUser.Username = Username;
-                ((Client)MainVM.LoggedInUser).Email = Email;
-                if (MainVM.LoggedInUser is Client)
+                if (!Validation.IsEmail(Email))
                 {
-                    ((Client)MainVM.LoggedInUser).Subscription = ((Client)MainVM.LoggedInUser).Subscription;
+                    return;
                 }
+                ((Client)MainVM.LoggedInUser).Email = Email;
+                ((Client)MainVM.LoggedInUser).PostalAddress = Address;
                 DbContext.SaveChanges();
             });
             
@@ -85,7 +116,13 @@ namespace SofreDaar.ViewModels
             get { return _address; }
             set { _address = value; OnPropertyChanged(); }
         }
-        
+        public string _gender;
+
+        public string Gender
+        {
+            get { return _gender; }
+            set { _gender = value; OnPropertyChanged(); }
+        }
         public ICommand UpgradeToGoldCommand { get; set; }
         public ICommand UpgradeToSilverCommand { get; set; }
         public ICommand UpgradeToBronzeCommand { get; set; }

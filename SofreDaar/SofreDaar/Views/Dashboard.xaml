@@ -30,6 +30,27 @@
         <DataTemplate DataType="{x:Type vm:MenuViewModel}">
             <views:Menu />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CartManagmentViewModel}">
+            <views:Cart />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrdersViewModel}">
+            <views:Orders />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ReceptionViewModel}">
+            <views:Reception />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrdersManagementViewModel}">
+            <views:OrdersManagement />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CommentsViewModel}">
+            <views:Comments />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CommentReplysViewModel}">
+            <views:CommentReplys />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ReportManagementViewModel}">
+            <views:ReportManagement />
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

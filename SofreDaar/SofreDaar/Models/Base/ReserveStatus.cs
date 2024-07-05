@@ -10,8 +10,7 @@ namespace SofreDaar.Models.Base
     {
         NotReserve,
         Canceled,
-        NotReceived,
-        Received
+        Reserve
 
     }
 }

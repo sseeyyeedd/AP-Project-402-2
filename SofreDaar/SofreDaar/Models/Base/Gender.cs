@@ -8,6 +8,7 @@ namespace SofreDaar.Models.Base
 {
     public enum Gender
     {
+        NotSet,
         Male,
         Female
     }

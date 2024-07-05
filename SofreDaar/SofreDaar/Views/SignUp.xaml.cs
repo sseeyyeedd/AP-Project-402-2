@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SofreDaar.ViewModels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 namespace SofreDaar.Views
 {
     /// <summary>
@@ -24,6 +25,7 @@ namespace SofreDaar.Views
         {
             InitializeComponent();
             DataContextChanged += OnDataContextChanged;
+            
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -34,5 +36,22 @@ namespace SofreDaar.Views
         }
 
         public SignUpViewModel VM { get; set; }
+
+        private void FemaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Gender=Models.Base.Gender.Female;
+            MaleButton.Foreground=Brushes.White;
+            FemaleButton.Foreground=Brushes.Yellow;
+
+        }
+        private void MaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var bc = new BrushConverter();
+             var bc1=new BrushConverter();
+            VM.Gender=Models.Base.Gender.Male;
+            FemaleButton.Foreground=Brushes.White;
+            MaleButton.Foreground=Brushes.Yellow;
+            
+        }
     }
 }

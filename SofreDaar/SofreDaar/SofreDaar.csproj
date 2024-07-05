@@ -25,10 +25,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CommentReplys.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Menu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Cart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrdersManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Orders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Reception.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Comments.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RestaurantSearch.xaml.cs">

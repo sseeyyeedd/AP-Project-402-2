@@ -25,10 +25,10 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <Button Margin="0,0,5,0" Content="ارسال دوباره ایمیل" Command="{Binding LoginCommand}"></Button>
+                            <Button Margin="0,0,5,0" Content="ارسال دوباره ایمیل" Command="{Binding ResendCommand}"></Button>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <Button Margin="5,0,0,0" Content="ویرایش مشخصات" Command="{Binding SignUpCommand}"></Button>
+                            <Button Margin="5,0,0,0" Content="ویرایش مشخصات" Command="{Binding BackCommand}"></Button>
                         </StackPanel>
 
                     </Grid>

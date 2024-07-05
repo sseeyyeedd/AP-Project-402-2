@@ -8,8 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="0,0,-142,-261">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
             
         </Grid.RowDefinitions>
         <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
@@ -22,15 +22,15 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <Label Content="نام و نام خانوادگی"></Label>
-                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding NameSearch}"></TextBox>
+                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding NameAndFamily}"></TextBox>
                         <Label Content="نام کاربری"></Label>
-                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding UsernameSearch}"></TextBox>
+                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding UserName}"></TextBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <Label Content="نام رستوران"></Label>
-                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding RestaurantNameSearch}"></TextBox>
+                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding RestaurantName}"></TextBox>
                         <Label Content="نام کاربری"></Label>
-                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding TitleSearch}"></TextBox>
+                        <TextBox MinWidth="200" Margin="0,0,10,0" Text="{Binding Title}"></TextBox>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
                         <Label Content="وضعیت گزارشات"></Label>
@@ -38,7 +38,7 @@
                ItemsSource="{Binding FilterReports}"
                SelectedItem="{Binding Filter, Mode=TwoWay}"
                />
-                        <Button Margin="0,5,0,0" Content="جستجو" Command="{Binding FilterCommand}"></Button>
+                        <Button Margin="0,5,0,0" Content="جستجو" Command="{Binding SearchCommand}"></Button>
                     </StackPanel>
                 </Grid>
                 
@@ -53,7 +53,7 @@
                     <DataGridTextColumn IsReadOnly="True" Header="توضیحات" Binding="{Binding Description}" Width="5*"/>
                     <DataGridTextColumn Header="پاسخ" Binding="{Binding Answer}" Width="5*"/>
                     <DataGridTextColumn IsReadOnly="True" Header="نام رستوران" Binding="{Binding Restaurant.Name}" Width="*"/>
-                    <DataGridTextColumn IsReadOnly="True" Header="نام کاربر" Binding="{Binding Client.Name}" Width="*"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="نام" Binding="{Binding Client.Username}" Width="*"/>
 
                 </DataGrid.Columns>
             </DataGrid>

@@ -21,7 +21,7 @@ namespace SofreDaar.ViewModels
             FoodCount=1;
             Cart= [];
             var categories = Context.Categorys.Where(x => x.RestaurantId==restaurant.Id);
-            var foods = Context.Foods.Where(x => x.RestaurantId==restaurant.Id);
+            var foods = Context.Foods.Where(x => x.RestaurantId==restaurant.Id&&x.Stock>0);
             if (categories is null)
             {
                 Categories= [];
@@ -43,6 +43,7 @@ namespace SofreDaar.ViewModels
                 if (NewRating<5)
                 {
                     NewRating++;
+                    UpdateRating();
                 }
             });
             RemoveStarCommand=new RelayCommand(o =>
@@ -50,6 +51,7 @@ namespace SofreDaar.ViewModels
                 if (NewRating>0)
                 {
                     NewRating--;
+                    UpdateRating();
                 }
             });
             AddFoodCommand=new RelayCommand(o =>
@@ -57,6 +59,7 @@ namespace SofreDaar.ViewModels
                 if (FoodCount<CurrentFood.Stock)
                 {
                     FoodCount++;
+                    
                 }
             });
             RemoveFoodCommand=new RelayCommand(o =>
@@ -78,7 +81,8 @@ namespace SofreDaar.ViewModels
                     {
                         Id=Guid.NewGuid(),
                         FoodId=CurrentFood.Id,
-                        Count=FoodCount
+                        Food=CurrentFood,
+                        Count=FoodCount,
                     };
                     Cart.Add(item);
                 }
@@ -90,9 +94,14 @@ namespace SofreDaar.ViewModels
                 {
                     return;
                 }
-
+                dashboard.CurrentViewModel=new CartManagmentViewModel(Context, MainVM, Dashboard, Cart,restaurant);
             });
-            ShowCommentsCommand=new RelayCommand(o => { });
+            ShowCommentsCommand=new RelayCommand(o => {
+                if (CurrentFood is not null)
+                {
+                    dashboard.CurrentViewModel=new CommentsViewModel(DbContext, MainVM, CurrentFood, this, dashboard);
+                }
+            });
         }
         void SetNull()
         {

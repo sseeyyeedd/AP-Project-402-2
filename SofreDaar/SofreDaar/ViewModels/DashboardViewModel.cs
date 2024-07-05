@@ -27,16 +27,21 @@ namespace SofreDaar.ViewModels
                 NavigationItems.Add(new NavigationItem("پروفایل", Profile));
                 NavigationItems.Add(new NavigationItem("ارسال گزارش", SendReport));
                 NavigationItems.Add(new NavigationItem("جستجوی رستوران", RestaurantSearch));
+                NavigationItems.Add(new NavigationItem("سفارشات", Orders));
             }
             else if (MainVM.LoggedInUser is Restaurant)
             {
                 NavigationItems.Add(new NavigationItem("مدیریت دسته ها", CategoryManagment));
                 NavigationItems.Add(new NavigationItem("مدیریت منو", MenuManagment));
+                NavigationItems.Add(new NavigationItem("مدیریت سرویس رزرو", Reception));
+                NavigationItems.Add(new NavigationItem("سفارشات", OrdersManagment));
             }
             else if (MainVM.LoggedInUser is Admin)
             {
                 NavigationItems.Add(new NavigationItem("مدیریت رستوران", RestaurantManagment));
+                NavigationItems.Add(new NavigationItem("مدیریت گزارشات", ReportManagement));
             }
+            NavigationItems.Add(new NavigationItem("خروج", Logout));
         }
         public ObservableCollection<NavigationItem> NavigationItems { get; set; } = [];
         private ObservableObject _currentViewModel;
@@ -64,6 +69,10 @@ namespace SofreDaar.ViewModels
         {
             CurrentViewModel=new RestaurantManagmentViewModel(Context, MainVM);
         }
+        void ReportManagement()
+        {
+            CurrentViewModel=new ReportManagementViewModel(Context, MainVM);
+        }
         void RestaurantSearch()
         {
             CurrentViewModel=new RestaurantSearchViewModel(Context, MainVM,this);
@@ -74,11 +83,28 @@ namespace SofreDaar.ViewModels
         }
         void MenuManagment()
         {
-            CurrentViewModel=new MenuManagementViewModel(Context, MainVM);
+            CurrentViewModel=new MenuManagementViewModel(Context, MainVM,this);
         }
         void SendReport()
         {
             CurrentViewModel=new SendReportViewModel(Context, MainVM);
+        }
+        void Orders()
+        {
+            CurrentViewModel=new OrdersViewModel(Context, MainVM);
+        }
+        void Reception()
+        {
+            CurrentViewModel=new ReceptionViewModel(Context, MainVM);
+        }
+        void OrdersManagment()
+        {
+            CurrentViewModel=new OrdersManagementViewModel(Context, MainVM);
+        }
+        void Logout()
+        {
+            MainVM.LoggedInUser=null;
+            MainVM.LoginCommand.Execute(this);
         }
     }
     public class NavigationItem
