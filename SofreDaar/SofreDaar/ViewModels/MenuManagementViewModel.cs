@@ -1,18 +1,20 @@
 ﻿using SofreDaar.Infrastructure;
 using SofreDaar.Models;
+using SofreDaar.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SofreDaar.ViewModels
 {
     public class MenuManagementViewModel:BaseViewModel
     {
-        public MenuManagementViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
+        public MenuManagementViewModel(DatabaseContext DbContext, MainViewModel main,DashboardViewModel dashboard) : base(DbContext, main)
         {
             var categories = Context.Categorys.Where(x => x.RestaurantId==MainVM.LoggedInUser.Id);
             var foods = Context.Foods.Where(x => x.RestaurantId==MainVM.LoggedInUser.Id);
@@ -32,6 +34,35 @@ namespace SofreDaar.ViewModels
             {
                 MenuFoods=new ObservableCollection<Food>(foods);
             }
+            DeleteFoodCommand =new RelayCommand(o =>
+            {
+                if (CurrentFood.Restaurant is not null)
+                {
+                    var Result = System.Windows.MessageBox.Show("حذف شود؟", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (Result==MessageBoxResult.Yes)
+                    {
+                        foreach (var item in Context.Commnets)
+                        {
+                            if (item.FoodId==CurrentFood.Id)
+                            {
+                                Context.Commnets.Remove(item);
+                            }
+                        }
+                        foreach (var item in Context.OrderItems)
+                        {
+                            if (item.FoodId==CurrentFood.Id)
+                            {
+                                Context.OrderItems.Remove(item);
+                            }
+                        }
+                        Context.Remove(CurrentFood);
+                        Context.SaveChanges();
+                        MenuFoods.Remove(CurrentFood);
+                        ResetCurrentFood();
+                    }
+                  
+                }
+            });
             AddOrUpdateCommand=new RelayCommand(o =>
             {
                 if (Category is null)
@@ -75,6 +106,13 @@ namespace SofreDaar.ViewModels
                 }
                 
             });
+            CommentsCommand=new RelayCommand(o =>
+            {
+                if (CurrentFood is not null&&CurrentFood.Restaurant is not null)
+                {
+                    dashboard.CurrentViewModel=new CommentsViewModel(DbContext, MainVM, CurrentFood, this, dashboard);
+                }
+            });
         }
         private Food _currentFood;
 
@@ -105,6 +143,8 @@ namespace SofreDaar.ViewModels
         }
         public ICommand AddOrUpdateCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
+        public ICommand CommentsCommand { get; set; }
+        public ICommand DeleteFoodCommand { get; set; }
         public void ResetCurrentFood()
         {
             CurrentFood=new Models.Food()

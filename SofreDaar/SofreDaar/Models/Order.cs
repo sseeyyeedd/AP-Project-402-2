@@ -14,8 +14,8 @@ public class Order:Base.Entity
     public ICollection<OrderItem> OrderItems { get; set; }
     public ReserveStatus ReserveStatus { get; set; }
     public DateTime DateTime { get; set; }
-    public DateTime ReserveDateTime { get; set; }
-    public DateTime CancelDateTime { get; set; }
+    public DateTime? ReserveDateTime { get; set; }
+    public DateTime? CancelDateTime { get; set; }
     public bool IsPaymentInCash { get; set; }
     public int PaymentValue { get; set; }
     public string OrderComment { get; set; }

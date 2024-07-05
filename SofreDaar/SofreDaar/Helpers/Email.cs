@@ -118,7 +118,7 @@ namespace SofreDaar.Helpers
                 Console.WriteLine("Error sending verification email: " + ex.Message);
             }
         }
-        public void SendOrderItemEmail(string recipientEmail,OrderItem orderItem)
+        public static void SendOrderItemEmail(string recipientEmail,List<OrderItem> orderItems)
         {
             try
             {
@@ -149,12 +149,16 @@ namespace SofreDaar.Helpers
              sb.Append("<tbody>");
         
              // Add order item details to the table
-             sb.Append("<tr>");
-             sb.Append($"<td>{orderItem.Food.Name}</td>");
-             sb.Append($"<td>{orderItem.Count}</td>");
-             sb.Append($"<td>{orderItem.Food.Price}</td>");
-             sb.Append($"<td>{orderItem.Food.Price * orderItem.Count}</td>");
-             sb.Append("</tr>");
+             
+                foreach (OrderItem item in orderItems) {
+                    sb.Append("<tr>");
+                    sb.Append($"<td>{item.Food.Name}</td>");
+                    sb.Append($"<td>{item.Count}</td>");
+                    sb.Append($"<td>{item.Food.Price}</td>");
+                    sb.Append($"<td>{item.Food.Price * item.Count}</td>");
+                    sb.Append("</tr>");
+                }
+            
         
              sb.Append("</tbody>");  
              sb.Append("</table>");

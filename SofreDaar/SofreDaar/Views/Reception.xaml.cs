@@ -17,33 +17,24 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for MenuManagement.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class Menu : UserControl
+    public partial class Reception : UserControl
     {
-        private object lastselected;
-        public Menu()
+        public Reception()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is MenuViewModel viewModel)
+            if (DataContext is ReceptionViewModel viewModel)
             {
                 VM = viewModel;
             }
         }
 
-        public MenuViewModel VM { get; set; }
 
-        private void MenuListView_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            lastselected=MenuListView.SelectedItem;
-        }
-
-        
-
-        
+        public ReceptionViewModel VM { get; set; }
     }
 }

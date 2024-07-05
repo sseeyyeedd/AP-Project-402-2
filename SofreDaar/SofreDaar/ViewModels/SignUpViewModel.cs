@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using SofreDaar.Helpers;
 using SofreDaar.Models;
+using SofreDaar.Models.Base;
 
 
 namespace SofreDaar.ViewModels
@@ -51,7 +52,7 @@ namespace SofreDaar.ViewModels
                     return;
                 }
                 //if inputs are correct make a user and put it into loggedinuser
-                MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email,PostalAddress=""};
+                MainVM.LoggedInUser=new Client{Name=Name,SureName= SureName,Username=Username,PhoneNumber = PhoneNumber,Email=Email,PostalAddress="",Gender=Gender};
                 //send verification code
                 ((Client)MainVM.LoggedInUser).VerificationCode = Helpers.Email.GenerateVerificationCode();
                 await Helpers.Email.SendVerificationEmailAsync(Email, ((Client)MainVM.LoggedInUser).VerificationCode);
@@ -77,6 +78,7 @@ namespace SofreDaar.ViewModels
                 OnPropertyChanged();
             }
         }
+        public Gender Gender { get; set; } = Gender.NotSet;
         private string _username;
 
         public string Username

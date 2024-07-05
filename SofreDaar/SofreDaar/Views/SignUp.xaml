@@ -33,7 +33,20 @@
                     <TextBox Text="{Binding Email}"></TextBox>
                     <Label Content="شماره تلفن"></Label>
                     <TextBox Text="{Binding PhoneNumber}"></TextBox>
-                   
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Button x:Name="MaleButton" Margin="0,10,0,0" Content="آقا" Click="MaleButton_Click"></Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Button x:Name="FemaleButton" Margin="0,10,0,0" Content="خانم" Click="FemaleButton_Click"></Button>
+                        </StackPanel>
+
+                    </Grid>
+
 
                     <Button x:Name="loginButton" Margin="0,30,0,0" Content="ارسال کد تایید" Command="{Binding SendCodeCommand}"></Button>
                 </StackPanel>

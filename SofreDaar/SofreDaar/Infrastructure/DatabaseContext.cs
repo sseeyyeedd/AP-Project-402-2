@@ -75,7 +75,8 @@ namespace SofreDaar.Infrastructure
                 entity
                     .HasOne(x => x.Food)
                     .WithMany(x => x.Commnets)
-                    .HasForeignKey(x => x.FoodId);
+                    .HasForeignKey(x => x.FoodId)
+                     .OnDelete(DeleteBehavior.SetNull);
                 entity
                 .HasOne(x => x.ReplayTo)
                 .WithMany(x => x.Replays)

@@ -6,6 +6,7 @@ using System.Windows;
 using SofreDaar.Infrastructure;
 using SofreDaar.ViewModels;
 using SofreDaar.Views;
+using System.Windows.Threading;
 
 namespace SofreDaar
 {
@@ -14,6 +15,10 @@ namespace SofreDaar
     /// </summary>
     public partial class App : Application
     {
+        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            //e.Handled = true;
+        }
         private IServiceProvider serviceProvider;
         public App()
         {

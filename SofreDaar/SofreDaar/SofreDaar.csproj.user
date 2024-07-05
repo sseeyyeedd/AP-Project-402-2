@@ -48,6 +48,9 @@
     <Page Update="Views\CategoryManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CommentReplys.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ConfirmEmail.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -60,7 +63,16 @@
     <Page Update="Views\Menu.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\OrdersManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Orders.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MenuManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Reception.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Profile.xaml">
@@ -70,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Cart.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Comments.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RestaurantSearch.xaml">

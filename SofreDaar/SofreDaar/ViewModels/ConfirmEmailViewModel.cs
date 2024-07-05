@@ -1,4 +1,5 @@
-﻿using SofreDaar.Infrastructure;
+﻿using SofreDaar.Helpers;
+using SofreDaar.Infrastructure;
 using SofreDaar.Models;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,18 @@ namespace SofreDaar.ViewModels
                     //show error
                     return;
                 }
-                
+
                 MainVM.SetPasswordCommand.Execute(o);
             });
-            
+            ResendCommand=new RelayCommand(o =>
+            {
+                ((Client)MainVM.LoggedInUser).VerificationCode = Helpers.Email.GenerateVerificationCode();
+                Helpers.Email.SendVerificationEmailAsync(GetEmail(), ((Client)MainVM.LoggedInUser).VerificationCode);
+            });
+            BackCommand=new RelayCommand(o =>
+            {
+                MainVM.SignUpCommand.Execute(o);
+            });
         }
         public string? GetEmail()
         {
@@ -43,5 +52,7 @@ namespace SofreDaar.ViewModels
             set { _code = value; OnPropertyChanged(); }
         }
         public ICommand ConfirmCommand { get; set; }
+        public ICommand ResendCommand { get; set; }
+        public ICommand BackCommand { get; set; }
     }
 }

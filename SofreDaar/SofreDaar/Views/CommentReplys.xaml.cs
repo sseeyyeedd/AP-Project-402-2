@@ -1,4 +1,5 @@
-﻿using SofreDaar.ViewModels;
+﻿using SofreDaar.Models;
+using SofreDaar.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,33 +18,29 @@ using System.Windows.Shapes;
 namespace SofreDaar.Views
 {
     /// <summary>
-    /// Interaction logic for MenuManagement.xaml
+    /// Interaction logic for RestaurantManagment.xaml
     /// </summary>
-    public partial class Menu : UserControl
+    public partial class CommentReplys : UserControl
     {
-        private object lastselected;
-        public Menu()
+        public CommentReplys()
         {
             InitializeComponent();
             DataContextChanged+=OnDataContextChanged;
         }
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is MenuViewModel viewModel)
+            if (DataContext is CommentReplysViewModel viewModel)
             {
                 VM = viewModel;
             }
         }
 
-        public MenuViewModel VM { get; set; }
 
-        private void MenuListView_MouseDown(object sender, MouseButtonEventArgs e)
+        public CommentReplysViewModel VM { get; set; }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            lastselected=MenuListView.SelectedItem;
+
         }
-
-        
-
-        
     }
 }
