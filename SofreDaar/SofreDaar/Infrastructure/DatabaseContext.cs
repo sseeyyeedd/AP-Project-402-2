@@ -24,7 +24,7 @@ namespace SofreDaar.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Admin>()
-                .HasData(new Admin() { Id = Guid.NewGuid() ,Username="admin",Password="123456",Name="Admin"});
+                .HasData(new Admin() { Id = Guid.NewGuid() ,Username="admin",Password="123456",Name="مدیر"});
             modelBuilder.Entity<Order>(entity =>
             {
                 entity

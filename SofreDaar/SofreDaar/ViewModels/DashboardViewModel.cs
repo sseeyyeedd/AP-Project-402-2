@@ -28,6 +28,7 @@ namespace SofreDaar.ViewModels
                 NavigationItems.Add(new NavigationItem("ارسال گزارش", SendReport));
                 NavigationItems.Add(new NavigationItem("جستجوی رستوران", RestaurantSearch));
                 NavigationItems.Add(new NavigationItem("سفارشات", Orders));
+                NavigationItems.Add(new NavigationItem("چت با ادمین", Chat));
             }
             else if (MainVM.LoggedInUser is Restaurant)
             {
@@ -40,6 +41,7 @@ namespace SofreDaar.ViewModels
             {
                 NavigationItems.Add(new NavigationItem("مدیریت رستوران", RestaurantManagment));
                 NavigationItems.Add(new NavigationItem("مدیریت گزارشات", ReportManagement));
+                NavigationItems.Add(new NavigationItem("چت با مشتری", Chat));
             }
             NavigationItems.Add(new NavigationItem("خروج", Logout));
         }
@@ -100,6 +102,10 @@ namespace SofreDaar.ViewModels
         void OrdersManagment()
         {
             CurrentViewModel=new OrdersManagementViewModel(Context, MainVM);
+        }
+        void Chat()
+        {
+            CurrentViewModel=new ChatViewModel(Context, MainVM);
         }
         void Logout()
         {

@@ -45,7 +45,7 @@
             </StackPanel>
         </Border>
 
-        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
+        <Border HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
             <DataGrid CanUserAddRows="False" CellEditEnding="DataGrid_CellEditEnding" ItemsSource="{Binding Reports}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <DataGrid.Columns>
