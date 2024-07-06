@@ -10,6 +10,9 @@
     <Compile Update="Views\CategoryManagement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Chat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ConfirmEmail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CategoryManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Chat.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CommentReplys.xaml">
