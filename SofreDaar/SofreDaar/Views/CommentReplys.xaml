@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="SofreDaar.Views.CommentReplys"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SofreDaar.Views"
+             xmlns:helpers="clr-namespace:SofreDaar.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="متن کامنت"></Label>
+                        <TextBox IsReadOnly="{Binding CanEdit}" MinWidth="300" Margin="0,0,10,0" Text="{Binding MainComment}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Visibility="{Binding Path=ShowStars, 
+Converter={StaticResource BoolToVis}}" Content="امتیاز:"></Label>
+                        <Label Visibility="{Binding Path=ShowStars, 
+Converter={StaticResource BoolToVis}}" Content="{Binding Star}"></Label>
+                        <Button Visibility="{Binding Path=CanEdit1, 
+Converter={StaticResource BoolToVis}}" Margin="0,5,0,0" MinWidth="200" Content="حذف" Command="{Binding RemoveCommentCommand}"></Button>
+                    </StackPanel>
+                   
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="متن کامنت"></Label>
+                        <TextBox MinWidth="300" Margin="0,0,10,0" Text="{Binding Text}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Button Margin="0,5,0,0" MinWidth="200" Content="ارسال" Command="{Binding AddCommentCommand}"></Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <Button Margin="0,5,0,0" MinWidth="200" Content="بازگشت" Command="{Binding BackCommand}"></Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" HorizontalAlignment="Stretch" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+
+
+            <ScrollViewer >
+                <StackPanel Margin="10">
+                    <ListView SelectedItem="{Binding Comment}" HorizontalContentAlignment="Stretch" x:Name="MenuListView" ItemsSource="{Binding Comments}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border  Background="{TemplateBinding Background}" Height="100" Margin="0,5,0,0" CornerRadius="10">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="#34495E"></Setter>
+
+                                                    </Style>
+                                                </Border.Style>
+                                                <StackPanel>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                            
+
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding Client.Name}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="{Binding DateTime}"></TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="20" FontWeight="Bold" TextAlignment="Center" Text="ویرایش شده" Visibility="{Binding Path=isEdited, 
+                                                            Converter={StaticResource BoolToVis}}"></TextBlock>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <TextBlock TextAlignment="Center" Text="{Binding Text}"></TextBlock>
+                                                </StackPanel>
+
+                                            </Border>
+
+
+                                        </ControlTemplate>
+
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Background" Value="#34495E"></Setter>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <MultiTrigger.Setters>
+                                            <Setter Property="Opacity" Value="0.7"/>
+                                        </MultiTrigger.Setters>
+
+                                    </MultiTrigger>
+                                    <Trigger Property="IsSelected" Value="True">
+
+                                        <Setter Property="Background" Value="#9B59B6" />
+                                        <Setter Property="Foreground" Value="#F5F7FA" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#9B59B6" />
+                                        <Setter Property="Foreground" Value="#F5F7FA" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </Border>
+    </Grid>
+</UserControl>

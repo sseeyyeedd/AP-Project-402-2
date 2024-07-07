@@ -1,1 +1,6 @@
 .vs/
+.idea/
+bin/
+obj/
+ui exports/
+SofreDaar.xd/

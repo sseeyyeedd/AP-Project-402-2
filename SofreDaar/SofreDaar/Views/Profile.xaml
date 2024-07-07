@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="SofreDaar.Views.Profile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SofreDaar.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel FlowDirection="RightToLeft" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="#F5F7FA" CornerRadius="30">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="نام:" Grid.Row="0" Grid.Column="0" Margin="5"/>
+                    <TextBox IsReadOnly="True" Text="{Binding Name }" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+                    <Label Content="نام خانوادگی:" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                    <TextBox IsReadOnly="True" Text="{Binding Surname }" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+                    <Label Content="شماره تلفن:" Grid.Row="2" Grid.Column="0" Margin="5"/>
+                    <TextBox IsReadOnly="True" Text="{Binding PhoneNumber }" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+                    <Label Content="نام کاربری:" Grid.Row="3" Grid.Column="0" Margin="5"/>
+                    <TextBox IsReadOnly="True" Text="{Binding Username }" Grid.Row="3" Grid.Column="1" Margin="5" />
+
+                    <Label Content="آدرس ایمیل:" Grid.Row="4" Grid.Column="0" Margin="5"/>
+                    <TextBox Text="{Binding Email }" Grid.Row="4" Grid.Column="1" Margin="5"/>
+
+                    <Label Content="آدرس پستی:" Grid.Row="5" Grid.Column="0" Margin="5"/>
+                    <TextBox Text="{Binding Address }" Grid.Row="5" Grid.Column="1" Margin="5"/>
+
+                    <Label Content="جنسیت:" Grid.Row="6" Grid.Column="0" Margin="5"/>
+                    <Label Grid.Row="6" Grid.Column="1" Content="{Binding Gender}"></Label>
+
+                    <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button Content="ارتقاء به طلایی" Command="{Binding UpgradeToGoldCommand}" Margin="5" MinWidth="130"/>
+                        <Button Content="ارتقا به نقره ای" Command="{Binding UpgradeToSilverCommand}" Margin="5" MinWidth="130"/>
+                        <Button Content="ارتقاء به برنزی" Command="{Binding UpgradeToBronzeCommand}" Margin="5" MinWidth="130"/>
+                    </StackPanel>
+
+                    <Button Content="ذخیره" Command="{Binding SaveCommand}" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5" MinWidth="130"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

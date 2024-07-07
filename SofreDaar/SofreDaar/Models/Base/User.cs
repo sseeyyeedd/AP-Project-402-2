@@ -1,23 +1,15 @@
-﻿namespace SofreDaar.Models.Base
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace SofreDaar.Models.Base
 {
     public class User : Entity
     {
+        [Required,MaxLength(63)]
         public string? Username { get; set; }
+        [Required,MaxLength(127)]
         public string? Name { get; set; }
-        public string? SureName { get; set; }
+        [MaxLength(63)]
         public string? Password { get; set; }
-        public string? Email { get; set; }
-        public string? ActivationCode { get; set; }
-        public string? PhoneNumber { get; set; }
-
-        public bool Activate(string code)
-        {
-            if (code == ActivationCode)
-            {
-                ActivationCode = "0";
-                return true;
-            }
-            return false;
-        }
     }
 }

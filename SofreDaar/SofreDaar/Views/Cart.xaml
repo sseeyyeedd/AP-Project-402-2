@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="SofreDaar.Views.Cart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SofreDaar.Views"
+             xmlns:helpers="clr-namespace:SofreDaar.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Background="#F5F7FA" CornerRadius="30">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                   
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Content="نام رستوران"></Label>
+                        <Label MinWidth="200" Margin="0,0,10,0" Content="{Binding RName}"></Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="قیمت کل"></Label>
+                        <Label MinWidth="200" Margin="10,0,10,0" Content="{Binding Price}"></Label>
+                </StackPanel>
+               
+               
+            </Grid>
+            
+        </Border>
+
+        <Border HorizontalAlignment="Center" Margin="5" FlowDirection="RightToLeft" Padding="10" Grid.Row="1" Background="#F5F7FA" CornerRadius="30">
+            <DataGrid CanUserAddRows="False" ItemsSource="{Binding OrderItems}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Header="نام غذا" Binding="{Binding Food.Name}" Width="*"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="تعداد" Binding="{Binding Count}" Width="*"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="قیمت" Binding="{Binding Food.Price}" Width="*"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="نوع" Binding="{Binding Food.Category.Title}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border Margin="5" Padding="10" Grid.Row="2" Background="#F5F7FA" CornerRadius="30">
+            <StackPanel FlowDirection="RightToLeft">
+                <StackPanel Visibility="{Binding Path=CanReserve, 
+Converter={StaticResource BoolToVis}}" HorizontalAlignment="Left">
+                    <StackPanel FlowDirection="LeftToRight" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Label>رزرو؟</Label>
+                        <CheckBox IsChecked="{Binding IsReserve}"></CheckBox>
+                    </StackPanel>
+                    
+                    <DatePicker SelectedDate="{Binding Date}" Loaded="DatePicker_Loaded"></DatePicker>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBox MinWidth="50" x:Name="minutesTextBod" TextChanged="minutesTextBod_TextChanged"></TextBox>
+                        <Label>:</Label>
+                        <TextBox MinWidth="50" x:Name="hoursTextBod" TextChanged="hoursTextBod_TextChanged"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Margin="0,30,0,0" Content="پرداخت آنلاین" Command="{Binding OnlinePaymentCommand}"></Button>
+                    <Button Grid.Column="1" Margin="0,30,0,0" Content="پرداخت نقدی" Command="{Binding CashPaymentCommand}"></Button>
+
+                </Grid>
+                
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
