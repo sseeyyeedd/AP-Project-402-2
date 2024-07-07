@@ -12,10 +12,10 @@ namespace SofreDaar.ViewModels
 {
     public class CategoryManagementViewModel:BaseViewModel
     {
-        IEnumerable<Category> categories;
+        List<Category> categories;
         public CategoryManagementViewModel(DatabaseContext DbContext, MainViewModel main) : base(DbContext, main)
         {
-            categories = Context.Categorys.Where(x => x.RestaurantId==MainVM.LoggedInUser.Id);
+            categories = Context.Categorys.Where(x => x.RestaurantId==MainVM.LoggedInUser.Id).ToList();
             if (categories is null)
             {
                 Categories = [];
@@ -30,6 +30,28 @@ namespace SofreDaar.ViewModels
                 {
                     if (!Categories.Contains(item))
                     {
+                        var foods= Context.Foods.ToList();
+                        foreach (var food in foods)
+                        {
+                            if (food.CategoryId==item.Id)
+                            {
+                                foreach (var comment in Context.Commnets)
+                                {
+                                    if (comment.FoodId==food.Id)
+                                    {
+                                        Context.Commnets.Remove(comment);
+                                    }
+                                }
+                                foreach (var orderitem in Context.OrderItems)
+                                {
+                                    if (orderitem.FoodId==food.Id)
+                                    {
+                                        Context.OrderItems.Remove(orderitem);
+                                    }
+                                }
+                                Context.Foods.Remove(food);
+                            }
+                        }
                         Context.Categorys.Remove(item);
                     }
                 }
@@ -46,7 +68,15 @@ namespace SofreDaar.ViewModels
                         Context.Categorys.Add(item);
                     }
                 }
-                Context.SaveChanges();
+                try
+                {
+                    Context.SaveChanges();
+                }
+                catch 
+                {
+
+                }
+               
             });
         }
         private ObservableCollection<Category> _categories;

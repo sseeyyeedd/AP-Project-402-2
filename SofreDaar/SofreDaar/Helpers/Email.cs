@@ -30,7 +30,7 @@ namespace SofreDaar.Helpers
                 mail.Body = "Your verification code is: " + code;
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
+                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "wU*,VJLw&-*m");
                 smtpClient.EnableSsl = true;
                 smtpClient.Send(mail);
 
@@ -55,7 +55,7 @@ namespace SofreDaar.Helpers
                 mail.Body = " سرویس برنزی شما فعال شد. سرویس ویژه برنزی به قیمت 100 تومان، امکان 2 رزرو در ماه با زمان رزرو یک ساعت و آستانه جریمه نیم ساعته را ارائه میدهد.";
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
+                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "wU*,VJLw&-*m");
                 smtpClient.EnableSsl = true;
                 smtpClient.Send(mail);
 
@@ -80,7 +80,7 @@ namespace SofreDaar.Helpers
                 mail.Body = " سرویس نقره ای شما فعال شد. سرویس ویژه نقره ای به قیمت 150 تومان، امکان 5 رزرو در ماه با زمان رزرو یک ساعت و نیمه و آستانه جریمه نیم ساعته را ارائه میدهد.";
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
+                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "wU*,VJLw&-*m");
                 smtpClient.EnableSsl = true;
                 smtpClient.Send(mail);
 
@@ -105,7 +105,7 @@ namespace SofreDaar.Helpers
                 mail.Body = " سرویس طلایی شما فعال شد. سرویس ویژه طلایی به قیمت 300 تومان، امکان 15 رزرو در ماه با زمان رزرو سه ساعت و آستانه جریمه 15 دقیقه ای را ارائه میدهد.";
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u");
+                smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "wU*,VJLw&-*m");
                 smtpClient.EnableSsl = true;
                 smtpClient.Send(mail);
 
@@ -172,7 +172,7 @@ namespace SofreDaar.Helpers
              // Configure the SMTP client
              smtpClient.Port = 587;
              smtpClient.UseDefaultCredentials = false;
-             smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "]@Z-N,AnI=,u"); // Replace with your email and password
+             smtpClient.Credentials = new NetworkCredential("mail@sseeyyeedd.ir", "wU*,VJLw&-*m"); 
              smtpClient.EnableSsl = true;
         
              // Send the email
